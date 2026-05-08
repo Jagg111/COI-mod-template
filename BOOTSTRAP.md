@@ -11,6 +11,7 @@ You are reading this because the user pasted the bootstrap prompt from the COI M
 - The user will see Windows UAC prompts (the "Do you want to allow this app to make changes?" dialog) when you install software. Tell them this *before* it happens so they aren't surprised.
 - Do not attempt to bypass or auto-approve Code mode's tool permission prompts. The user will click Allow when they see them. Tell them what permission you're about to request and why.
 - **Never tell the user to "press Enter" to accept a default.** This is a chat UI; an empty Enter does nothing — they must type something to send. Phrase every default-question so a one-word answer works: *"Type `yes` to use that, or paste a different X."*
+- **Don't narrate intent before acting.** Avoid "Let me X..." / "I'll X next..." patterns that describe an action you haven't yet taken — they create stalls where you describe but forget to actually execute. **Do the action, then narrate the result.** *"Found your Steam library at C:\Program Files (x86)\Steam"* beats *"Let me check your Steam library."* If you genuinely need to set up the user for a heads-up (e.g. UAC prompt about to appear), keep it tight and chain it directly into the tool call without ending the message there.
 
 ---
 
@@ -183,29 +184,45 @@ Tell the user: "Set `COI_ROOT` (an environment variable, basically a setting you
 
 ---
 
-## Step 5 — Clone the launchpad
+## Step 4.5 — Pick a work folder
 
-Default location: `C:\Code\COI-mod-template`. If `C:\Code` doesn't exist, create it first.
+Where on disk does the user want their mod work to live? This is a **single decision** that drives every subsequent path default — the launchpad clone, the official modding examples, and any future spawned mods all default to subfolders of this work-root.
+
+Ask:
+
+> "Where would you like your COI mod work to live? This is where I'll put the launchpad, the official modding examples, and your future mod projects. Default: `C:\Code`. Type `yes` to use that, or paste a different folder (e.g. `D:\Modding` if you'd rather use a different drive)."
+
+If they reply `yes` (or any affirmative), use `C:\Code`. Otherwise use the path they paste, after stripping a trailing backslash and resolving to an absolute path.
+
+Create the folder if it doesn't exist:
 
 ```powershell
-New-Item -ItemType Directory -Path 'C:\Code' -Force | Out-Null
+New-Item -ItemType Directory -Path '<work-root>' -Force | Out-Null
 ```
 
-If `C:\Code\COI-mod-template` already exists:
+Save the work-root for Step 5 below and for KICKOFF.md to read in its Step 4 (mod location) and Step 6 (modding examples). Throughout the rest of this flow, anywhere the docs say `C:\Code` as a default, mentally substitute the user's chosen work-root.
+
+---
+
+## Step 5 — Clone the launchpad
+
+Target location: `<work-root>\COI-mod-template` (where `<work-root>` is what the user picked in Step 4.5). The work-root folder was already created in Step 4.5, so just go straight to the clone-or-pull check.
+
+If `<work-root>\COI-mod-template` already exists:
 - If it's a git repo with origin matching `https://github.com/Jagg111/COI-mod-template(.git)?` (case-insensitive, trailing `.git` optional): skip cloning, run `git pull` to update, and continue.
 - Otherwise (different origin, not a git repo, random files): rename it to `COI-mod-template.bak-<yyyyMMdd-HHmmss>` and clone fresh. Tell the user what you did so the backup folder isn't a surprise.
 
 Check the existing origin with:
 ```powershell
-$existingOrigin = (git -C 'C:\Code\COI-mod-template' remote get-url origin 2>$null)
+$existingOrigin = (git -C '<work-root>\COI-mod-template' remote get-url origin 2>$null)
 ```
 
 Then clone if needed:
 ```powershell
-git clone https://github.com/Jagg111/COI-mod-template.git C:\Code\COI-mod-template
+git clone https://github.com/Jagg111/COI-mod-template.git <work-root>\COI-mod-template
 ```
 
-Tell the user the launchpad is at `C:\Code\COI-mod-template`, mention they can keep it (re-run the wizard there for additional mods) or delete it later.
+Tell the user the launchpad is at `<work-root>\COI-mod-template`, mention they can keep it (re-run the wizard there for additional mods) or delete it later.
 
 ---
 

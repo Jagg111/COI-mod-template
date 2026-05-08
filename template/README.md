@@ -1,25 +1,24 @@
 # {{MOD_DISPLAY_NAME}}
 
-> {{MOD_DESCRIPTION_SHORT}}
-
----
-
-## 📖 About
-
 {{MOD_DESCRIPTION_LONG}}
 
 ---
 
-## 🛠️ How to keep building
+## 🛠️ How to work on the mod
 
-To work on this mod with Claude:
+Open this folder in **Claude Desktop's Code mode** (`Ctrl+3` inside the app — not Chat, not Cowork). From there, just **tell Claude what you want** in plain English. The more specific the better:
 
-1. **Open this folder in Claude Desktop's Code mode** (`Ctrl+3` inside the app — not Chat, not Cowork).
-2. **Tell Claude what you want to build, fix, or learn.** Plain English works:
-   - *"Make my hello message show up as a button in the game's top toolbar"*
-   - *"Why isn't my mod loading?"*
-   - *"What does this code do?"*
-3. **Test in-game often.** Every time Claude builds your mod, it auto-deploys to Captain of Industry. Launch the game, load any save, and check `%APPDATA%\Captain of Industry\Logs\` for lines starting with `{{MOD_ID}}:` — those are messages from your mod.
+- *"Add a button labeled 'Paint' to the top toolbar"*
+- *"Why isn't my mod loading?"*
+- *"What does this code do?"*
+
+A few tips if Claude Code is new to you:
+
+- **Click Allow on permission prompts.** The first time Claude wants to run a command or edit a file, it'll ask. That's how it does work for you.
+- **It's safe to experiment.** Claude saves your work as it goes (per your mode), so if something feels wrong just say *"undo that last change"*.
+- **Test in-game often.** Every time Claude builds, your mod auto-deploys to Captain of Industry. Launch the game, load any save, and try your changes.
+- **If something breaks**, type `/it-broke` and Claude will read the game logs, diagnose what went wrong, and propose a fix. You don't need to look at logs yourself.
+- **End each working session with `/wrap-up`.** It saves your progress and writes a quick handoff note so the next session picks up cleanly.
 
 > 🎚️ You're working with Claude in **{{USER_MODE}}** mode (see `CLAUDE.md` for what that means and what to expect). You can change modes later by editing the `## User Profile` section there.
 
@@ -71,14 +70,6 @@ This mod is distributed via the [COI Mod Hub](https://hub.coigame.com). When you
 
 ---
 
-## ✍️ Author
-
-{{MOD_AUTHOR}}
-
 ## 🌱 Built with
 
 Bootstrapped from the [COI Mod Template](https://github.com/Jagg111/COI-mod-template) by [@Jagg111](https://github.com/Jagg111).
-
-## 📜 License
-
-MIT for the mod's own code. See `LICENSE` for the Captain of Industry game code carve-out.

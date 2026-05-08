@@ -9,6 +9,6 @@
 	"can_add_to_saved_game": true,
 	"can_remove_from_saved_game": true,
 	"authors": [ "{{MOD_AUTHOR}}" ],
-	"links": [ "https://github.com/{{GITHUB_USERNAME}}/{{MOD_ID}}" ],
+	"links": [ "https://github.com/{{GITHUB_USERNAME}}/COI-{{MOD_ID}}" ],
 	"min_game_version": "0.8.0"
 }

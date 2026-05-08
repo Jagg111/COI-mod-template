@@ -146,6 +146,12 @@ Get-ChildItem -Path $TargetPath -Recurse -File | Where-Object { $_.Name -match '
 # Built inline rather than shipped from the template, because template/.gitignore
 # would otherwise prevent it from being tracked in the launchpad repo itself.
 
+$moddingRepoLine = if ($ModdingRepoPath -eq '(not cloned)') {
+    "- **Official Captain of Industry modding examples repo:** *not cloned during setup — user opted to skip.*`r`n  When Claude needs to reference real working game code (Research Protocol step 2 in ``CLAUDE.md``), ask the user where their clone is, or offer to clone it now from ``https://github.com/MaFi-Games/Captain-of-industry-modding`` and update this file."
+} else {
+    "- **Official Captain of Industry modding examples repo:** ``$ModdingRepoPath```r`n  Used for the Research Protocol in ``CLAUDE.md`` (step 2). Real working code from the game devs."
+}
+
 $localPathsContent = @"
 # Local paths - machine-specific
 
@@ -158,8 +164,7 @@ If you're reading this on a freshly-cloned repo from someone else, these paths p
 - **Launchpad (COI Mod Template):** ``$LaunchpadPath``
   Re-run ``/kickoff`` there if you want to spawn another mod.
 
-- **Official Captain of Industry modding examples repo:** ``$ModdingRepoPath``
-  Used for the Research Protocol in ``CLAUDE.md`` (step 2). Real working code from the game devs.
+$moddingRepoLine
 
 - **Game install (``COI_ROOT``):** read from the user-scope environment variable.
   PowerShell: ``[Environment]::GetEnvironmentVariable('COI_ROOT','User')``

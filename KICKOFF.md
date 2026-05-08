@@ -66,7 +66,9 @@ The user's GitHub handle is the canonical identity used everywhere downstream �
 
 Ask **one** question:
 
-> "Where should the project live? Default: `C:\Code\<MOD_ID>`. Or paste any folder path you'd prefer."
+> "Where should the project live? Default: `<work-root>\<MOD_ID>` (where `<work-root>` is the folder the user picked back in BOOTSTRAP Step 4.5 — usually `C:\Code`, but could be anywhere they chose). Or paste any folder path they'd prefer."
+
+If `<work-root>` isn't known (e.g. user invoked `/kickoff` directly without going through BOOTSTRAP), default to `C:\Code\<MOD_ID>` and offer to override.
 
 Resolve to an absolute path. The folder name comes from the path's last segment — there's no separate "folder name" question.
 
@@ -106,7 +108,7 @@ Use `AskUserQuestion` with **"Want me to clone the official modding examples rep
 - **Skip for now** — fine, can do this later
 
 If yes:
-1. Default location: `C:\Code\Captain-of-industry-modding`.
+1. Default location: `<work-root>\Captain-of-industry-modding` (work-root from BOOTSTRAP Step 4.5; falls back to `C:\Code\Captain-of-industry-modding` if not known).
 2. If that path exists and is a git repo: just use it (do `git pull` to update).
 3. Otherwise clone from `https://github.com/MaFi-Games/Captain-of-industry-modding`.
 
@@ -183,12 +185,16 @@ git commit -m "Initial commit from COI-mod-template"
 
 ### 7d. Create the GitHub repo (if they chose that in Step 5)
 
+The repo name on GitHub is **always prefixed with `COI-`** so the user's COI mods are identifiable in their repo list. The mod's internal ID stays clean (no prefix in the `.csproj`/`.cs`/`manifest.id`/deployed folder); only the public GitHub repo name gets the prefix.
+
 Pass the user's `description_short` so the repo gets a tagline on GitHub instead of an empty description:
 
 ```powershell
-gh repo create <MOD_ID> --public --description "<description-short>"   # or --private
+gh repo create COI-<MOD_ID> --public --description "<description-short>"   # or --private
 git push -u origin main
 ```
+
+For a mod with `MOD_ID = "Paintbrush"`, this creates `<github-username>/COI-Paintbrush` (e.g. `Jagg111/COI-Paintbrush`).
 
 ### 7e. Test build
 

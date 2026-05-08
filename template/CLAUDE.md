@@ -11,7 +11,7 @@ This project was bootstrapped from the [COI Mod Template](https://github.com/Jag
 - **Display name:** {{MOD_DISPLAY_NAME}}
 - **Mod ID:** `{{MOD_ID}}`
 - **Author:** {{MOD_AUTHOR}}
-- **GitHub:** `{{GITHUB_USERNAME}}/{{MOD_ID}}`
+- **GitHub:** `{{GITHUB_USERNAME}}/COI-{{MOD_ID}}`
 - **Game:** Captain of Industry
 - **Framework:** Mafi (.NET 4.8)
 - **Mod type:** `IMod`
