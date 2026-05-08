@@ -127,14 +127,20 @@ Update the version number and commit everything together.
    - If the release closes or fixes a GitHub issue, append `Fixes #N` or `Closes #N`
 
 3. **Behavior depends on the user's mode (read CLAUDE.md User Profile block):**
-   - **Captain's Chair / Learning the Ropes** — auto-commit, auto-tag, auto-push:
+   - **Captain's Chair / Apprentice** — auto-commit, auto-tag, auto-push:
      ```
      git add manifest.json changelog.txt
      git commit -m "<suggested message>"
      git tag v<version>
      git push && git push --tags
      ```
-   - **First Mate / Old Salt** — show the exact commands to run and wait for the user to confirm they've committed and pushed before continuing.
+   - **Master** — auto-commit and auto-tag, then **show the push commands and wait** for the user. This is a teaching moment about publishing:
+     ```
+     git add manifest.json changelog.txt
+     git commit -m "<suggested message>"
+     git tag v<version>
+     ```
+     Then explain what's next: *"Now your release is committed and tagged locally. To publish, run these — `git push` sends the commit, `git push --tags` sends the version tag separately so people downloading the source can find this exact release. Want me to run them, or do you want to type them yourself?"*
 
    The git tag is for source archaeology only — the COI Hub is the actual release channel. Tags do not trigger any distribution.
 

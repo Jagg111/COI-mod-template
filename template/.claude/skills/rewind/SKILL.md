@@ -43,7 +43,7 @@ This skill is "go back to before I broke it" for non-coders. It hides git-reset/
    >
    > Continue? (yes/no)
 
-   In **Captain's Chair** mode, only ask once and accept any affirmative answer. In other modes, be more thorough.
+   In **Captain's Chair** mode, only ask once and accept any affirmative answer. In **Apprentice** and **Master** modes, be more thorough — explain that uncommitted-but-not-rewound state will be lost, and verify they understand before proceeding.
 
 6. **Do the rewind:**
    ```
@@ -64,7 +64,10 @@ This skill is "go back to before I broke it" for non-coders. It hides git-reset/
 
    Or just "Done — back to <X>." Pick what fits the moment; don't milk the metaphor.
 
-9. **In Learning the Ropes mode**, drop a one-sentence teaching moment first time: "(by the way, going back to a previous commit is called a 'reset' — git keeps the history of every snapshot you ever made, so we can move between them.)"
+9. **Teaching beats by mode** (first time per session):
+   - **Apprentice:** one-sentence ELI5 — "(by the way, going back to a previous commit is called a 'reset' — git keeps the history of every snapshot you ever made, so we can move between them.)"
+   - **Master:** deeper concept dive — what `git reset --hard` actually does (moves the branch pointer + replaces working tree contents), how the reflog still preserves the old state for ~30 days as a safety net, and why this is one of the few "destructive" git ops to be careful with. Two or three sentences.
+   - **Captain's Chair:** no teaching beat.
 
 ## Notes
 

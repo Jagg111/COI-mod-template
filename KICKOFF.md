@@ -36,10 +36,9 @@ This is the single most important question. It drives Claude's behavior in the s
 
 Use `AskUserQuestion` with **"How do you want to work with me?"** and these four options:
 
-- **Captain's Chair** — *Just make it work.* You describe what you want, I make it happen. No git stuff in your face, no "are you sure?" prompts for routine work. I'll commit and push automatically as we go.
-- **Learning the Ropes** — *Teach me as we go.* Same as Captain's Chair, plus I'll occasionally explain what just happened so you pick up dev concepts naturally.
-- **First Mate** — *I want to understand the moves.* I explain reasoning before bigger changes, confirm before commits and pushes. Slower but thorough.
-- **Old Salt** — *I know what I'm doing.* Terse responses, no teaching moments, full git control on your end.
+- **Captain's Chair** — *just make it work.* Auto-commit + auto-push as we go. No teaching moments, minimal narration, plain English only. You focus on the mod; I handle every line of git underneath.
+- **Apprentice** — *teach me as we go.* Same auto-commit + auto-push as Captain's Chair. Plus: I'll explain what's happening in plain ELI5 terms as we work — short asides like *"that thing I just did is called X — it's how Y works"* — so you naturally pick up modding concepts while we build. Medium teaching, medium narration.
+- **Master** — *I want to master this craft.* Deep-dive learning mode. Auto-commit (git stays out of your way), but **no auto-push** — you'll trigger pushes yourself, which means you'll pick up that one piece of git. Plus: maximum narration AND concept-level teaching — I take time to explain how things work under the hood, why they're designed that way, and how they connect. Slowest, highest token cost; you'll actually learn the craft.
 
 Save the exact label string they pick — `spawn.ps1` accepts these verbatim.
 
@@ -158,7 +157,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Code\COI-mod-template\sc
     -ModDescriptionLong "<long>" `
     -ModAuthor "<github-username>" `
     -GithubUsername "<github-username>" `
-    -UserMode "<one of: Captain's Chair, Learning the Ropes, First Mate, Old Salt>" `
+    -UserMode "<one of: Captain's Chair, Apprentice, Master>" `
     -ModdingRepoPath "<modding-repo-path-or-(not cloned)>"
 ```
 

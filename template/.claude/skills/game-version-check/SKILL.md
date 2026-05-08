@@ -175,13 +175,12 @@ If they differ and all checks passed:
 
 3. If the README references a verified version anywhere, update it too.
 
-4. Commit (behavior depends on the user's mode in CLAUDE.md User Profile):
-   - **Captain's Chair / Learning the Ropes** — auto-commit:
-     ```
-     git add manifest.json README.md
-     git commit -m "Update max verified game version to <version>"
-     ```
-   - **First Mate / Old Salt** — show the commands and wait for confirmation.
+4. Commit (auto-commit in all modes; push behavior follows the per-mode rules in `/snapshot`):
+   ```
+   git add manifest.json README.md
+   git commit -m "Update max verified game version to <version>"
+   ```
+   In **Captain's Chair / Apprentice** also auto-push. In **Master**, leave the push to the user (and explain why if it's their first time encountering this rhythm).
 
 5. Tell the user: "Version reference updated. You can now run `/ship-it` to publish a new release. Once the release is out, don't forget to update the max-verified-game-version on your Hub listing — that step is manual."
 

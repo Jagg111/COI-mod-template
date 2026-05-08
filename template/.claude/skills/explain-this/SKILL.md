@@ -57,9 +57,9 @@ Explain:
 
 ## Tone
 
-- **Captain's Chair / Learning the Ropes** — friendly, conversational, examples > theory.
-- **First Mate** — same as above but you can go deeper.
-- **Old Salt** — terse, accurate, no hand-holding.
+- **Captain's Chair** — friendly, conversational, brief. Examples > theory. Skip anything jargony unless they explicitly ask.
+- **Apprentice** — friendly, conversational, ELI5. Examples > theory. Define terms inline, then keep going.
+- **Master** — go deeper. Concept dives are welcome here — "what is reflection?" should get a real explanation of how it works under the hood, not just a one-line analogy. Tangents into related concepts are fine when relevant.
 
 Default to conversational unless told otherwise.
 

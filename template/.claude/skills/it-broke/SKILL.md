@@ -48,16 +48,18 @@ This is the highest-leverage skill in the project. The user is stuck and demoral
    Example (Captain's Chair):
    > It looks like the game updated and renamed the `IronForge` type to `Foundry`. Your mod is still asking for the old name on line 42 of `MyMod.cs`. I can fix this — should I update it?
 
-   Example (First Mate):
+   Example (Apprentice):
+   > Looks like the game updated and renamed `IronForge` to `Foundry`. Your mod still asks for the old name on line 42 of `MyMod.cs`, so when it tries to find the type it gets nothing back and crashes. (By the way: that's what a `NullReferenceException` means — your code tried to use something that wasn't there.) I'll update the name and we'll be back in business.
+
+   Example (Master):
    > **What happened:** A `NullReferenceException` was thrown on line 42 of `MyMod.cs`. The reflection call is asking for a field called `m_oldName` on `IronForge`, which doesn't exist anymore.
    >
-   > **Why:** The game update renamed `IronForge` to `Foundry` and `m_oldName` to `m_displayName`. Reflection silently returns null when a field isn't found, then your code crashes when it tries to use the null value.
+   > **Why:** The game update renamed `IronForge` to `Foundry` and `m_oldName` to `m_displayName`. Reflection silently returns null when a field isn't found (it's pessimistic-by-default — there's no compile-time check, so the type system can't catch it), then your code crashes when it tries to use the null value as if it were a real object. This is exactly why we wrap reflection lookups in `ReflectionProbe` — it surfaces these mismatches as actionable errors instead of silent nulls.
    >
-   > **Proposed fix:** Update the `ReflectionProbe` call on line 42 to use the new names. I'll show you the diff before applying.
+   > **Proposed fix:** Update the `ReflectionProbe` call on line 42 to use the new names. Applying now.
 
 6. **Offer to fix.** Behavior depends on User Profile:
-   - **Captain's Chair / Learning the Ropes:** Just propose and apply if they say yes.
-   - **First Mate / Old Salt:** Show the proposed change first, get approval, then apply.
+   - **All three modes:** propose the fix and apply it (auto-commit follows the per-mode rule). Master gets the deeper "why this works" framing; Apprentice gets a one-line ELI5 aside; Captain's Chair gets the bare proposal.
 
 7. **After fixing:** Suggest the next sanity check:
    - "Want to do a quick build to make sure it compiles? `dotnet build <SLN_FILE>`"
