@@ -14,7 +14,7 @@ You will need to use **Claude Desktop in Code mode** specifically — not Chat m
 
 ---
 
-## Required: a GitHub account
+## 🐙 Required: a GitHub account
 
 You'll need a free GitHub account for this. Two reasons:
 1. **Privacy-preserving commits** — without an account, we can't generate the email format that keeps your real address out of public commit history.
@@ -29,7 +29,7 @@ If you don't:
 
 ---
 
-## Setup — three steps
+## 🚀 Setup — three steps
 
 ### 1. Install Claude Desktop
 
@@ -55,22 +55,23 @@ That's it. Claude will take it from there.
 
 ---
 
-## What happens next
+## ⚙️ What happens next
 
-Claude will:
+Once you paste that prompt, Claude takes over. Here's the play-by-play:
 
-1. Check what software you already have. Anything missing (Git, the .NET SDK, GitHub CLI), it will offer to install for you. You'll see Windows permission prompts (UAC) — click **Yes** to approve.
-2. Auto-detect where you have Captain of Industry installed (via Steam) and set things up so the build knows where to find it.
-3. Clone this template into a folder on your computer (default: `C:\Code\COI-mod-template`).
-4. Walk you through a short wizard — your mod's name, what it does, how you want Claude to work with you, optional GitHub setup.
-5. Build a brand new "hello world" mod project in its own folder (default: `C:\Code\YourModName`), test that it builds, and deploy it to your game's mods folder.
-6. Tell you to start a fresh Claude Desktop session pointed at your new mod folder. From there, you actually build the mod by chatting with Claude.
+1. **Quick inventory** of what's already on your machine (Git, .NET SDK, GitHub CLI). Anything missing, Claude offers to install for you. You'll see Windows permission prompts (UAC) — click **Yes** to approve each.
+2. **Auto-detect Captain of Industry** via Steam, so the build knows where to find it.
+3. **Where do you want your mod work to live?** Default is `C:\Code` (Claude will create it if needed), but you can pick any folder or drive — `D:\Modding`, `C:\Projects`, wherever you keep your dev work. The launchpad and your future mods all live under that one folder.
+4. **A short wizard** asks a few questions: your mod's name and description, how you want to work with Claude (three modes), and whether you want a GitHub repo for the mod (recommended). If yes, the repo gets created as `COI-<your-mod-name>` so all your COI mods are easy to spot in your repo list later.
+5. **Confirmation gate.** Before anything gets created or pushed, Claude shows you a blueprint table of every choice you made — mod name, location, GitHub repo public/private, work style, etc. You type `yes` to start construction, or tell Claude what to change. Nothing is committed until you confirm.
+6. **Construction.** Claude creates the project folder, copies the template, personalizes everything, sets up git, optionally creates and pushes the GitHub repo, runs a test build, and deploys the hello-world mod to your game's mods folder.
+7. **Handoff.** When it's done, Claude tells you to close this session and start a fresh Claude Desktop session pointed at your new mod folder. From there you build the actual mod by chatting with Claude — using plain English, no commands needed.
 
-Throughout the process, Claude Desktop will ask permission the first time it tries to do something new (run a command, edit a file, etc.). **Click "Allow"** when prompted — those permissions are how Claude does work for you. You can review and tighten them later in Claude Desktop's settings.
+Throughout the process, Claude Desktop will ask permission the first time it tries to do something new (run a command, edit a file, fetch a URL). **Click "Allow"** when prompted — those permissions are how Claude does work for you. You can review and tighten them later in Claude Desktop's settings.
 
 ---
 
-## Troubleshooting
+## 🔧 Troubleshooting
 
 **"I'm not in Code mode."**
 Press Ctrl+3 in Claude Desktop. If that does nothing, you may have an older version — update via the app's settings or reinstall from https://claude.ai/download.
@@ -86,7 +87,7 @@ Once your mod project is set up, you can use the `/it-broke` skill — type that
 
 ---
 
-## Credits
+## 🙏 Credits
 
 This template was assembled from lessons learned building [ResearchQueue](https://hub.coigame.com/Mod/17). That mod started as an experiment to see if I could actually build a mod without knowing how to code myself with Claude. I was so happy with the end result that I made this template to help reduce the barrier to entry for other players who aspire to make mods too but don't know how to code.  Thanks to MaFi Games for the modding policy that makes any of this possible.
 
