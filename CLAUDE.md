@@ -50,7 +50,7 @@ Files in `template/` use `{{LIKE_THIS}}` placeholders that `/kickoff` substitute
 | `{{MOD_AUTHOR}}` | Author's name or handle |
 | `{{GITHUB_USERNAME}}` | GitHub username (or empty) |
 | `{{YEAR}}` | Current year (for LICENSE copyright) |
-| `{{USER_MODE}}` | The mode they picked: Captain's Chair / Learning the Ropes / Show Your Work / Expert |
+| `{{USER_MODE}}` | The mode they picked: Captain's Chair / Learning the Ropes / First Mate / Old Salt |
 | `{{USER_PROFILE_BLOCK}}` | The full markdown block matching their mode (defined in `kickoff/SKILL.md`) |
 | `{{MODDING_REPO_PATH}}` | Local path to the official MaFi modding examples repo |
 | `{{LAUNCHPAD_PATH}}` | Absolute path to this launchpad |

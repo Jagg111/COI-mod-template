@@ -134,7 +134,7 @@ Update the version number and commit everything together.
      git tag v<version>
      git push && git push --tags
      ```
-   - **Show Your Work / Expert** — show the exact commands to run and wait for the user to confirm they've committed and pushed before continuing.
+   - **First Mate / Old Salt** — show the exact commands to run and wait for the user to confirm they've committed and pushed before continuing.
 
    The git tag is for source archaeology only — the COI Hub is the actual release channel. Tags do not trigger any distribution.
 

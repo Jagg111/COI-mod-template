@@ -22,7 +22,7 @@ This skill is "save my work right now" for non-coders. It's a plain-English wrap
    - If the user passed a message after `/snapshot` (e.g. `/snapshot trying out blue button`), use it as-is.
    - Otherwise: look at what's changed (`git diff --stat`) and propose a plain-English message describing what was changed. One line, no jargon. Examples: "Try out blue button", "Fix mod not loading", "Update changelog".
    - In **Captain's Chair** or **Learning the Ropes** mode, just use the proposed message.
-   - In **Show Your Work** or **Expert** mode, show the proposed message and ask for approval.
+   - In **First Mate** or **Old Salt** mode, show the proposed message and ask for approval.
 
 5. **Commit:**
    ```

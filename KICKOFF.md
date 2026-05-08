@@ -38,8 +38,8 @@ Use `AskUserQuestion` with **"How do you want to work with me?"** and these four
 
 - **Captain's Chair** — *Just make it work.* You describe what you want, I make it happen. No git stuff in your face, no "are you sure?" prompts for routine work. I'll commit and push automatically as we go.
 - **Learning the Ropes** — *Teach me as we go.* Same as Captain's Chair, plus I'll occasionally explain what just happened so you pick up dev concepts naturally.
-- **Show Your Work** — *I want to understand the moves.* I explain reasoning before bigger changes, confirm before commits and pushes. Slower but thorough.
-- **Expert** — *I know what I'm doing.* Terse responses, no teaching moments, full git control on your end.
+- **First Mate** — *I want to understand the moves.* I explain reasoning before bigger changes, confirm before commits and pushes. Slower but thorough.
+- **Old Salt** — *I know what I'm doing.* Terse responses, no teaching moments, full git control on your end.
 
 Save the exact label string they pick — `spawn.ps1` accepts these verbatim.
 
@@ -117,9 +117,36 @@ Save the path for the spawn.
 
 ---
 
-## Step 7 — Spawn the project
+## Step 7 — Confirm the blueprint, then spawn
 
-Now you have everything. Run the spawn script. Always invoke via `powershell -NoProfile -ExecutionPolicy Bypass -File` (Windows' default execution policy blocks running `.ps1` files directly).
+### 7a. Show the blueprint and ask before building
+
+**Don't skip this step.** Once `spawn.ps1` runs, the project folder is created, files are committed, and (if they chose a public GitHub repo) the description goes live publicly. The user needs a chance to course-correct on any of the inputs.
+
+Show a tidy table of everything you've gathered, then ask one explicit question:
+
+> Here's the blueprint before I lay the keel:
+>
+> | Field | Value |
+> |---|---|
+> | **Mod name** | <display-name> |
+> | **Mod ID** | <mod-id> |
+> | **Short pitch** | <short> |
+> | **Description** | <long> |
+> | **Location** | <target-path> |
+> | **GitHub repo** | <Public/Private/Not now> — `<github-username>/<mod-id>` (if creating) |
+> | **Work style** | <user-mode> |
+> | **Modding examples** | <modding-repo-path or "Skipped"> |
+>
+> Look right? Reply `yes` / `looks good` to start construction, or tell me what to change (e.g. "make it private", "rename to FooBar", "the description should be...").
+
+Wait for an affirmative response. If they ask to change something, apply the change and re-show the table. Loop until they confirm. **Critical:** never auto-proceed from showing the blueprint to spawning — even if they seem clearly ready, wait for an explicit go.
+
+**Phrasing rule for the chat UI:** never tell the user to "press Enter" to accept a default. In a chat window, an empty Enter does nothing — the user must type something to send. When proposing a default, phrase the question so a one-word answer works: *"Default: `C:\Code\HelloWorld`. Type `yes` to use that, or paste a different folder."* Or even more naturally: *"I'll use `C:\Code\HelloWorld` unless you'd rather pick somewhere else — what's your call?"* This rule applies in **every** step of the wizard that offers a default.
+
+### 7b. Run the spawn script
+
+Once they confirm, run the script. Always invoke via `powershell -NoProfile -ExecutionPolicy Bypass -File` (Windows' default execution policy blocks running `.ps1` files directly).
 
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Code\COI-mod-template\scripts\spawn.ps1" `
@@ -131,7 +158,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Code\COI-mod-template\sc
     -ModDescriptionLong "<long>" `
     -ModAuthor "<github-username>" `
     -GithubUsername "<github-username>" `
-    -UserMode "<one of: Captain's Chair, Learning the Ropes, Show Your Work, Expert>" `
+    -UserMode "<one of: Captain's Chair, Learning the Ropes, First Mate, Old Salt>" `
     -ModdingRepoPath "<modding-repo-path-or-(not cloned)>"
 ```
 
@@ -146,7 +173,7 @@ Narrate as you go (one short line each):
 
 After the script returns successfully, do these in the spawned folder:
 
-### 7a. Initialize git
+### 7c. Initialize git
 
 ```powershell
 cd <target>
@@ -155,14 +182,16 @@ git add -A
 git commit -m "Initial commit from COI-mod-template"
 ```
 
-### 7b. Create the GitHub repo (if they chose that in Step 5)
+### 7d. Create the GitHub repo (if they chose that in Step 5)
+
+Pass the user's `description_short` so the repo gets a tagline on GitHub instead of an empty description:
 
 ```powershell
-gh repo create <MOD_ID> --public  # or --private
+gh repo create <MOD_ID> --public --description "<description-short>"   # or --private
 git push -u origin main
 ```
 
-### 7c. Test build
+### 7e. Test build
 
 ```powershell
 cd <target>

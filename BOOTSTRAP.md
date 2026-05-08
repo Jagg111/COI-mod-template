@@ -10,6 +10,7 @@ You are reading this because the user pasted the bootstrap prompt from the COI M
 - Use absolute paths throughout (don't depend on starting working directory).
 - The user will see Windows UAC prompts (the "Do you want to allow this app to make changes?" dialog) when you install software. Tell them this *before* it happens so they aren't surprised.
 - Do not attempt to bypass or auto-approve Code mode's tool permission prompts. The user will click Allow when they see them. Tell them what permission you're about to request and why.
+- **Never tell the user to "press Enter" to accept a default.** This is a chat UI; an empty Enter does nothing — they must type something to send. Phrase every default-question so a one-word answer works: *"Type `yes` to use that, or paste a different X."*
 
 ---
 

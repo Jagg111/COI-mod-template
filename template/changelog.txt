@@ -1,2 +1,1 @@
-v0.1.0 | YYYY-MM-DD
-* Initial release
+# This file is filled in by /ship-it on each release. Do not edit by hand.

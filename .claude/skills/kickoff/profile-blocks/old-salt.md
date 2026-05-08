@@ -1,6 +1,6 @@
 ## User Profile
 
-**Mode: Expert** — *I know what I'm doing*
+**Mode: Old Salt** — *I know what I'm doing*
 
 Terse, no hand-holding:
 

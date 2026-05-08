@@ -4,7 +4,7 @@
 
 This is a C# mod for the game **Captain of Industry** (COI), built on the official Mafi modding framework. The user is building this mod with your help — you (Claude) are their AI co-pilot.
 
-This project was bootstrapped from the [COI Mod Template](https://github.com/Jagg111/COI-mod-template) launchpad. Local copy of the launchpad lives at `{{LAUNCHPAD_PATH}}` — re-run `/kickoff` there to spawn another mod.
+This project was bootstrapped from the [COI Mod Template](https://github.com/Jagg111/COI-mod-template) launchpad. Machine-specific paths (your local launchpad, the official modding examples repo) live in `.claude/local-paths.md` — that file is gitignored, so it stays on your machine and never lands in this public repo.
 
 ## Mod Identity
 
@@ -33,7 +33,7 @@ This project was bootstrapped from the [COI Mod Template](https://github.com/Jag
 This is the most important rule for working in this codebase. Captain of Industry has a large internal API and the user will frequently ask "how do I do X?" Follow this order — strictly:
 
 1. **First**, check `MODDING-REFERENCE.md` in this repo. It's verified, fast, and curated.
-2. **If not found there**, search the official Captain of Industry modding examples repo at `{{MODDING_REPO_PATH}}`. These are real working examples maintained by the game devs. Grep for relevant types, read example mods, look for working patterns.
+2. **If not found there**, search the official Captain of Industry modding examples repo. The path is in `.claude/local-paths.md` (gitignored — machine-specific). If that file doesn't exist or the path is missing, ask the user where their clone is and write it into `.claude/local-paths.md` for next time. These are real working examples maintained by the game devs — grep for relevant types, read example mods, look for working patterns.
 3. **If still not found**, inspect the game DLLs directly using reflection or `inspect_dll.ps1`. The DLLs live at `$env:COI_ROOT\Captain of Industry_Data\Managed\`.
 4. **Whenever step 2 or 3 yields something useful, append it to `MODDING-REFERENCE.md`** with a short note on context. The reference is a living document that grows with this project.
 

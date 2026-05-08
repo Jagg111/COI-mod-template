@@ -48,7 +48,7 @@ This is the highest-leverage skill in the project. The user is stuck and demoral
    Example (Captain's Chair):
    > It looks like the game updated and renamed the `IronForge` type to `Foundry`. Your mod is still asking for the old name on line 42 of `MyMod.cs`. I can fix this — should I update it?
 
-   Example (Show Your Work):
+   Example (First Mate):
    > **What happened:** A `NullReferenceException` was thrown on line 42 of `MyMod.cs`. The reflection call is asking for a field called `m_oldName` on `IronForge`, which doesn't exist anymore.
    >
    > **Why:** The game update renamed `IronForge` to `Foundry` and `m_oldName` to `m_displayName`. Reflection silently returns null when a field isn't found, then your code crashes when it tries to use the null value.
@@ -57,7 +57,7 @@ This is the highest-leverage skill in the project. The user is stuck and demoral
 
 6. **Offer to fix.** Behavior depends on User Profile:
    - **Captain's Chair / Learning the Ropes:** Just propose and apply if they say yes.
-   - **Show Your Work / Expert:** Show the proposed change first, get approval, then apply.
+   - **First Mate / Old Salt:** Show the proposed change first, get approval, then apply.
 
 7. **After fixing:** Suggest the next sanity check:
    - "Want to do a quick build to make sure it compiles? `dotnet build <SLN_FILE>`"

@@ -181,7 +181,7 @@ If they differ and all checks passed:
      git add manifest.json README.md
      git commit -m "Update max verified game version to <version>"
      ```
-   - **Show Your Work / Expert** — show the commands and wait for confirmation.
+   - **First Mate / Old Salt** — show the commands and wait for confirmation.
 
 5. Tell the user: "Version reference updated. You can now run `/ship-it` to publish a new release. Once the release is out, don't forget to update the max-verified-game-version on your Hub listing — that step is manual."
 

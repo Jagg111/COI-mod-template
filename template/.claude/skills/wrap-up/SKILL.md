@@ -20,7 +20,7 @@ Long sessions get expensive and slow. This skill is the clean exit ramp. Run it 
 
 3. **Handle uncommitted work.** If `git status --porcelain` is non-empty:
    - In **Captain's Chair / Learning the Ropes**: auto-commit it via `/snapshot` logic with a descriptive message ("Wrap-up snapshot: <summary>").
-   - In **Show Your Work / Expert**: show what's uncommitted and ask whether to commit, stash, or leave as-is.
+   - In **First Mate / Old Salt**: show what's uncommitted and ask whether to commit, stash, or leave as-is.
 
 4. **Write a handoff note** to a file at the repo root called `NEXT-SESSION.md`. Overwrite if it exists. Format:
 

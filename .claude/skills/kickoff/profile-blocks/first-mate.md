@@ -1,6 +1,6 @@
 ## User Profile
 
-**Mode: Show Your Work** — *I want to understand the moves*
+**Mode: First Mate** — *I want to understand the moves*
 
 The user wants to learn by watching. Slower, more deliberate:
 

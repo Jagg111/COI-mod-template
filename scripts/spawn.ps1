@@ -15,7 +15,7 @@ param(
     [Parameter(Mandatory = $true)] [string] $ModDescriptionLong,
     [Parameter(Mandatory = $true)] [string] $ModAuthor,
     [Parameter(Mandatory = $false)] [string] $GithubUsername = '',
-    [Parameter(Mandatory = $true)] [ValidateSet('Captain''s Chair','Learning the Ropes','Show Your Work','Expert')] [string] $UserMode,
+    [Parameter(Mandatory = $true)] [ValidateSet('Captain''s Chair','Learning the Ropes','First Mate','Old Salt')] [string] $UserMode,
     [Parameter(Mandatory = $false)] [string] $ModdingRepoPath = '(not cloned)'
 )
 
@@ -42,8 +42,8 @@ $TargetPath = (Resolve-Path -LiteralPath $TargetPath).Path
 $modeSlug = switch ($UserMode) {
     "Captain's Chair"     { 'captains-chair' }
     'Learning the Ropes'  { 'learning-the-ropes' }
-    'Show Your Work'      { 'show-your-work' }
-    'Expert'              { 'expert' }
+    'First Mate'          { 'first-mate' }
+    'Old Salt'            { 'old-salt' }
 }
 $profileBlockPath = Join-Path $LaunchpadPath ".claude/skills/kickoff/profile-blocks/$modeSlug.md"
 if (-not (Test-Path -LiteralPath $profileBlockPath)) {
@@ -142,6 +142,41 @@ Get-ChildItem -Path $TargetPath -Recurse -File | Where-Object { $_.Name -match '
     foreach ($k in $subsPlain.Keys) { $newName = $newName.Replace("{{$k}}", [string]$subsPlain[$k]) }
     if ($newName -ne $_.Name) { Rename-Item -LiteralPath $_.FullName -NewName $newName }
 }
+
+# --- Generate .claude/local-paths.md (gitignored, machine-specific) -------------
+# Built inline rather than shipped from the template, because template/.gitignore
+# would otherwise prevent it from being tracked in the launchpad repo itself.
+
+$localPathsContent = @"
+# Local paths - machine-specific
+
+This file lists paths on the current machine that are **specific to where you cloned things**. It is **gitignored** so it stays on this machine only - never push it, never share it.
+
+If you're reading this on a freshly-cloned repo from someone else, these paths probably won't match where things live on your machine. Update them.
+
+## Paths
+
+- **Launchpad (COI Mod Template):** ``$LaunchpadPath``
+  Re-run ``/kickoff`` there if you want to spawn another mod.
+
+- **Official Captain of Industry modding examples repo:** ``$ModdingRepoPath``
+  Used for the Research Protocol in ``CLAUDE.md`` (step 2). Real working code from the game devs.
+
+- **Game install (``COI_ROOT``):** read from the user-scope environment variable.
+  PowerShell: ``[Environment]::GetEnvironmentVariable('COI_ROOT','User')``
+
+## How Claude uses this file
+
+``CLAUDE.md`` instructs Claude to look here for machine-specific paths instead of having them hardcoded into the committed ``CLAUDE.md``. When Claude needs the modding examples repo for research and it's not where this file says, ask the user and update this file.
+"@
+
+# Normalize to CRLF for consistency with the rest of the spawned files.
+$localPathsContent = $localPathsContent -replace "`r`n", "`n"
+$localPathsContent = $localPathsContent -replace "`n",   "`r`n"
+
+$localPathsDir = Join-Path $TargetPath '.claude'
+New-Item -ItemType Directory -Path $localPathsDir -Force | Out-Null
+[System.IO.File]::WriteAllText((Join-Path $localPathsDir 'local-paths.md'), $localPathsContent, $utf8NoBom)
 
 # --- Sanity check: no leftover {{PLACEHOLDER}} tokens anywhere -----------------
 

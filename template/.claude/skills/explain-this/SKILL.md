@@ -58,8 +58,8 @@ Explain:
 ## Tone
 
 - **Captain's Chair / Learning the Ropes** — friendly, conversational, examples > theory.
-- **Show Your Work** — same as above but you can go deeper.
-- **Expert** — terse, accurate, no hand-holding.
+- **First Mate** — same as above but you can go deeper.
+- **Old Salt** — terse, accurate, no hand-holding.
 
 Default to conversational unless told otherwise.
 
