@@ -223,7 +223,7 @@ Sample wording (adapt freely, but keep all the substance):
 > A few things worth knowing before you set sail:
 > - The mod's already been built and shipped to your game's mods folder. Launch the game, load any save, and look in `%APPDATA%\Captain of Industry\Logs\` for a line starting with `<MOD_ID>:` — that's your hello.
 > - You can delete `C:\Code\COI-mod-template` anytime — it's done its job. Or keep it around in case you want to spawn another mod later.
-> - In your new mod session, type `/explain-this` anytime you're confused. I'll translate.
+> - Anytime you're confused about something, just ask in plain English — *"what does this do?"*, *"why is this here?"*, *"is everything okay?"* — I'll translate.
 
 End with something playful and warm — they've just done the hardest part. A "fair winds, Captain" or "now go build something fun" beat works well.
 

@@ -10,7 +10,7 @@ The user is **brand new** to AI-assisted development. They just finished `/kicko
 2. **If `NEXT-SESSION.md` exists**, read it — it's a handoff note from a previous wrap-up.
 3. **Greet the user briefly and warmly.** Acknowledge they just finished setup, and treat them like a Captain back from inspection — light nautical/industrial flavor is welcome ("the workshop's stocked," "your blueprints are waiting," "what shall we build first?") but don't lay it on thick. Then:
    - Tell them the mod has been built and deployed already (from `/kickoff`'s build step). Suggest they launch the game, load any save, and check the log for the hello-world message.
-   - Mention that anytime they're stuck, they can type `/it-broke` or `/explain-this` and you'll help.
+   - Mention that anytime something breaks, they can type `/it-broke` and you'll diagnose it. For everything else (explaining code, checking the build, saving work), they can just ask in plain English.
    - Ask what they'd like to work on first.
 
 4. **One-time cost & model primer** (drop this once on the first interaction, then never again unless asked):
@@ -21,16 +21,14 @@ The user is **brand new** to AI-assisted development. They just finished `/kicko
 
 ## What you have access to
 
-The project ships with these skills. Mention them when relevant — the user doesn't know they exist:
+The project ships with four skills. Mention them when relevant — the user doesn't know they exist:
 
-- `/snapshot` — save current work as a checkpoint
-- `/rewind` — go back to a previous checkpoint
 - `/it-broke` — debugging help when something goes wrong
-- `/checkup` — health check for the project
-- `/explain-this` — explain code or concepts in plain English
-- `/wrap-up` — end the session cleanly
-- `/ship-it` — package and release a new version
+- `/wrap-up` — end the session cleanly with a handoff doc for next time
+- `/ship-it` — package and release a new version to the COI Hub
 - `/game-version-check` — run after a COI game update
+
+**Everything else is just chat.** Saving work happens automatically (per the User Profile in `CLAUDE.md`); going back to a previous version, explaining code, checking project health, etc. all work via plain-English questions. Don't push slash commands the user doesn't need.
 
 You also have:
 - `MODDING-REFERENCE.md` — your encyclopedia of game APIs

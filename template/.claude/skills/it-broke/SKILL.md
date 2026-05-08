@@ -61,9 +61,7 @@ This is the highest-leverage skill in the project. The user is stuck and demoral
 6. **Offer to fix.** Behavior depends on User Profile:
    - **All three modes:** propose the fix and apply it (auto-commit follows the per-mode rule). Master gets the deeper "why this works" framing; Apprentice gets a one-line ELI5 aside; Captain's Chair gets the bare proposal.
 
-7. **After fixing:** Suggest the next sanity check:
-   - "Want to do a quick build to make sure it compiles? `dotnet build <SLN_FILE>`"
-   - Or run `/checkup`.
+7. **After fixing:** Run a quick build to confirm it compiles (`dotnet build <SLN_FILE>`) and tell the user the result. If they want a fuller health check on top of the build (manifest valid? reflection targets still good?), they can just ask — *"is everything okay now?"*
 
 8. **Before declaring done — document what you learned.** If your investigation surfaced anything not already in `MODDING-REFERENCE.md` — a renamed type, a field that moved, a confusing error pattern, a non-obvious gotcha — append it to the reference now. Debugging mode is the highest-yield discovery path in the project; if you skip this, future-you (or a different session) will redo the investigation. This is non-negotiable per the Documentation Rules in CLAUDE.md.
 

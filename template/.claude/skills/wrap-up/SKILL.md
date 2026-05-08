@@ -18,7 +18,14 @@ Long sessions get expensive and slow. This skill is the clean exit ramp. Run it 
    Write a 2-4 line plain-English summary. Examples:
    > This session: added a hello-world button to the top toolbar, fixed the button not appearing on small resolutions, and confirmed the mod loads cleanly in-game. Two snapshots saved.
 
-3. **Handle uncommitted work.** If `git status --porcelain` is non-empty, auto-commit via `/snapshot` logic with a descriptive message ("Wrap-up snapshot: <summary>"). The `/snapshot` skill handles per-mode push behavior — auto-push for Captain's Chair / Apprentice, manual push for Master.
+3. **Handle uncommitted work.** If `git status --porcelain` is non-empty, auto-commit it with a descriptive message ("Wrap-up snapshot: <summary>"):
+   ```
+   git add -A
+   git commit -m "Wrap-up snapshot: <summary>"
+   ```
+   Then push behavior follows the user's mode:
+   - **Captain's Chair / Apprentice:** if a remote is configured, run `git push` automatically.
+   - **Master:** do NOT auto-push. Tell the user the wrap-up snapshot saved locally and pushing is their call. Offer: *"Want me to push these changes to GitHub before we close out, or hold off?"*
 
 4. **Write a handoff note** to a file at the repo root called `NEXT-SESSION.md`. Overwrite if it exists. Format:
 

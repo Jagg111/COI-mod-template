@@ -109,12 +109,10 @@ This project ships with these custom skills. Tell the user about them when relev
 |---|---|
 | `/ship-it` | Full release workflow: version bump, draft release notes, package zip, Hub upload reminder |
 | `/game-version-check` | Run after a COI game update. Diagnoses what broke and helps fix it. |
-| `/snapshot` | Save current work as a commit (git for non-coders) |
-| `/rewind` | Go back to a previous snapshot |
 | `/it-broke` | Reads the game log + recent changes, explains what went wrong, offers a fix |
-| `/wrap-up` | Wrap the current session: summarize, commit, suggest next session |
-| `/checkup` | Health check: build, reflection targets, manifest, env vars |
-| `/explain-this` | Explain code, concepts, or game internals in plain English |
+| `/wrap-up` | Wrap the current session: summarize, commit uncommitted work, write `NEXT-SESSION.md` handoff |
+
+**Everything else is just chat.** Saving work, going back to a previous version, explaining code, checking that the build's healthy — none of those need a slash command. The user can ask in plain English (*"save my work"*, *"go back to before I broke the button"*, *"what does this code do?"*, *"is everything okay?"*) and you handle it. Auto-commit behavior is dictated by their User Profile mode above. Don't make them learn slash commands they don't need.
 
 ## Helping the User Manage Cost and Context
 
