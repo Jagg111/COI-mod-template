@@ -1,0 +1,11 @@
+# Windows-only project. Normalize line endings to CRLF in the working tree.
+* text=auto eol=crlf
+
+# Binary types — never touch.
+*.dll binary
+*.pdb binary
+*.zip binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary

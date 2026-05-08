@@ -1,0 +1,17 @@
+# Claude Code per-machine settings
+.claude/settings.local.json
+.claude/worktrees/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vs/
+.idea/
+*.user
+*.suo
+
+# .NET build output (the launchpad itself should never be built, but guard against it)
+template/bin/
+template/obj/

@@ -1,0 +1,14 @@
+{
+	"id": "{{MOD_ID}}",
+	"version": "0.1.0",
+	"display_name": "{{MOD_DISPLAY_NAME}}",
+	"description_short": "{{MOD_DESCRIPTION_SHORT}}",
+	"description_long": "{{MOD_DESCRIPTION_LONG}}",
+	"primary_dlls": [ "{{MOD_ID}}.dll" ],
+	"non_locking_dll_load": true,
+	"can_add_to_saved_game": true,
+	"can_remove_from_saved_game": true,
+	"authors": [ "{{MOD_AUTHOR}}" ],
+	"links": [ "https://github.com/{{GITHUB_USERNAME}}/{{MOD_ID}}" ],
+	"min_game_version": "0.8.0"
+}
