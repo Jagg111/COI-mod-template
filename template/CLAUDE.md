@@ -41,7 +41,7 @@ Do not skip step 1 to go straight to the game DLLs. The reference exists precise
 
 ## Reflection Safety
 
-Anything that uses reflection on game internals (`GetField`, `GetProperty`, `GetMethod`, `GetType("...")`) must go through the `ReflectionProbe` helper if and when one is added to this project. If the user is just starting and there's no `ReflectionProbe` yet, that's fine - but as soon as we touch reflection, build that helper first. It keeps `/game-version-check` automatically in sync with reality and prevents silent breakage on game updates.
+Anything that uses reflection on game internals (`GetField`, `GetProperty`, `GetMethod`, `GetType("...")`) must go through the `ReflectionProbe` helper if and when one is added to this project. If the user is just starting and there's no `ReflectionProbe` yet, that's fine - but as soon as we touch reflection, build that helper first. It keeps `/game-updated` automatically in sync with reality and prevents silent breakage on game updates.
 
 See the ResearchQueue mod's source for a reference implementation if you need one - but copy the pattern, not the specific reflection targets.
 
@@ -72,7 +72,7 @@ On build, the mod is automatically deployed to `%APPDATA%\Captain of Industry\Mo
 manifest.json           # Mod metadata
 changelog.txt           # Cumulative player-facing changelog
 MODDING-REFERENCE.md    # Living technical reference for game APIs
-GETTING-STARTED.md      # First-session orientation (delete after first session)
+CLAUDE-FIRST-SESSION.md # First-session orientation (auto-deleted by /wrap-up)
 scripts/                # Build/release/diagnostic scripts
 .claude/skills/         # Custom skills available in this project
 ```
@@ -108,7 +108,7 @@ This project ships with these custom skills. Tell the user about them when relev
 | Skill | What it does |
 |---|---|
 | `/ship-it` | Full release workflow: version bump, draft release notes, package zip, Hub upload reminder |
-| `/game-version-check` | Run after a COI game update. Diagnoses what broke and helps fix it. |
+| `/game-updated` | Run after a COI game update. Diagnoses what broke and helps fix it. |
 | `/it-broke` | Reads the game log + recent changes, explains what went wrong, offers a fix |
 | `/wrap-up` | Wrap the current session: summarize, commit uncommitted work, write `NEXT-SESSION.md` handoff |
 

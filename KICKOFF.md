@@ -36,7 +36,7 @@ This is the single most important question. It drives Claude's behavior in the s
 
 Use `AskUserQuestion` with **"How do you want to work with me?"** and these four options:
 
-- **Captain's Chair** - *just make it work.* Auto-commit + auto-push as we go. No teaching moments, minimal narration, plain English only. You focus on the mod; I handle every line of git underneath.
+- **Captain's Chair** - *just make it work.* Auto-commit + auto-push as we go. No teaching moments, minimal narration, plain English only. You focus on the mod; I handle every line of git underneath. *(Claude still checks with you before anything irreversible — it just skips the lessons.)*
 - **Apprentice** - *teach me as we go.* Same auto-commit + auto-push as Captain's Chair. Plus: I'll explain what's happening in plain ELI5 terms as we work - short asides like *"that thing I just did is called X - it's how Y works"* - so you naturally pick up modding concepts while we build. Medium teaching, medium narration.
 - **Master** - *I want to master this craft.* Deep-dive learning mode. Auto-commit (git stays out of your way), but **no auto-push** - you'll trigger pushes yourself, which means you'll pick up that one piece of git. Plus: maximum narration AND concept-level teaching - I take time to explain how things work under the hood, why they're designed that way, and how they connect. Slowest, highest token cost; you'll actually learn the craft.
 

@@ -191,7 +191,7 @@ Once you start using reflection, the game updating can silently break things - t
 
 1. The mod can self-report at startup which targets resolved and which didn't.
 2. The static diagnostic script (`scripts/check-reflection-targets.ps1`) can scan the source for `ReflectionProbe.*` calls and verify them against the actual game DLLs without running the game.
-3. After a game update, `/game-version-check` knows exactly what to verify.
+3. After a game update, `/game-updated` knows exactly what to verify.
 
 When you add reflection to this mod, build the helper *first*. The ResearchQueue mod is a working reference for the pattern.
 

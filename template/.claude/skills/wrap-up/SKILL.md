@@ -49,7 +49,9 @@ Long sessions get expensive and slow. This skill is the clean exit ramp. Run it 
 
    This file is git-tracked. It's how a fresh Claude session in a new conversation picks up the thread. CLAUDE.md instructs Claude to read this on session start if it exists.
 
-5. **Print the handoff message:**
+5. **Clean up first-session files.** If `CLAUDE-FIRST-SESSION.md` exists at the repo root, delete it. It's an orientation file for the very first session and is no longer needed once a wrap-up has run.
+
+6. **Print the handoff message:**
 
    > 🛠️ Pulling into port. Here's the day's haul:
    >
@@ -61,7 +63,7 @@ Long sessions get expensive and slow. This skill is the clean exit ramp. Run it 
 
    Examples of a good closing line: "The factory hums on without us." / "Save the world another day." / "Steam up, see you next shift." Don't reuse the same one twice in a row.
 
-6. **Don't actually close anything.** This skill doesn't kill the session - that's the user's call. It just wraps things up cleanly so they *can* close.
+7. **Don't actually close anything.** This skill doesn't kill the session - that's the user's call. It just wraps things up cleanly so they *can* close.
 
 ## When to suggest this skill (without being asked)
 

@@ -1,4 +1,6 @@
-﻿# Getting Started - for Claude
+﻿> **For the human reading this:** This file helps Claude get up to speed in your first session. You can ignore it — it'll be cleaned up after your first `/wrap-up`.
+
+# Getting Started - for Claude
 
 > **This file is meant for Claude (the AI), not the user.** It orients a fresh session that's just been opened in a project that was bootstrapped from the COI Mod Template launchpad. Read this on session start, then act on it.
 
@@ -26,7 +28,7 @@ The project ships with four skills. Mention them when relevant - the user doesn'
 - `/it-broke` - debugging help when something goes wrong
 - `/wrap-up` - end the session cleanly with a handoff doc for next time
 - `/ship-it` - package and release a new version to the COI Hub
-- `/game-version-check` - run after a COI game update
+- `/game-updated` - run after a COI game update
 
 **Everything else is just chat.** Saving work happens automatically (per the User Profile in `CLAUDE.md`); going back to a previous version, explaining code, checking project health, etc. all work via plain-English questions. Don't push slash commands the user doesn't need.
 
@@ -47,7 +49,7 @@ Follow the **Research Protocol** in `CLAUDE.md` strictly: reference → official
 
 ## When this file has served its purpose
 
-After the first 1-2 sessions, the user will have their bearings and this file becomes redundant. They (or you) can delete it anytime - just leaving a single `CLAUDE.md` is fine. Don't auto-delete; let them decide.
+After the first 1-2 sessions, the user will have their bearings and this file becomes redundant. `/wrap-up` deletes it automatically when it runs — so it'll clean itself up at the end of the first session.
 
 ## Final note to you
 

@@ -36,7 +36,7 @@ This is the highest-leverage skill in the project. The user is stuck and demoral
    | **Build error** | Game log doesn't even mention the mod | The mod didn't load. Run `dotnet build` and read that error instead. |
    | **Reflection target broken** | `NullReferenceException` near a reflection call, or "type X not found" | Run `scripts\check-reflection-targets.ps1` and `inspect_dll.ps1` on the affected type. |
    | **Code change introduced bug** | Error appeared right after a recent change | Compare against the previous commit; explain what changed and what to revert or fix. |
-   | **Game updated** | Things that worked yesterday now fail | Suggest running `/game-version-check`. |
+   | **Game updated** | Things that worked yesterday now fail | Suggest running `/game-updated`. |
    | **Mod isn't enabled** | No mod log entries at all | Check the in-game mod menu; the mod may need to be enabled. |
    | **COI_ROOT or build issue** | "Type or namespace not found" at build time | Check the env var and the build output. |
 

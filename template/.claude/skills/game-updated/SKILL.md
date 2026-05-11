@@ -1,5 +1,5 @@
 ﻿---
-name: game-version-check
+name: game-updated
 description: Run after a Captain of Industry game update. Compares game version, runs reflection diagnostics, guides manual in-game testing, analyzes logs, and prompts for version bump if needed.
 disable-model-invocation: true
 ---

@@ -21,14 +21,14 @@ template/                      # The skeleton mod that gets copied + personalize
   ├── CLAUDE.md                # Spawned project's CLAUDE.md (with {{USER_PROFILE_BLOCK}})
   ├── README.md                # Spawned project's README
   ├── MODDING-REFERENCE.md     # Living game API reference (universal-only seed)
-  ├── GETTING-STARTED.md       # First-session orientation for Claude
+  ├── CLAUDE-FIRST-SESSION.md  # First-session orientation for Claude
   ├── changelog.txt            # Empty changelog seed
   ├── LICENSE                  # MIT + COI carve-out
   ├── .gitignore
   ├── scripts/                 # Build/release/diagnostic PowerShell scripts
   └── .claude/skills/          # Skills that ship with every spawned mod
        ├── ship-it/
-       ├── game-version-check/
+       ├── game-updated/
        ├── snapshot/
        ├── rewind/
        ├── it-broke/
