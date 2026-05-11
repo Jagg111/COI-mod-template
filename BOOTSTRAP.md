@@ -1,8 +1,8 @@
-# BOOTSTRAP.md — onboarding playbook for Claude
+﻿# BOOTSTRAP.md - onboarding playbook for Claude
 
 You are reading this because the user pasted the bootstrap prompt from the COI Mod Template README. They are a beginner on Windows, working in **Claude Desktop's Code mode (Ctrl+3)**. Your job is to walk them from "fresh app install" through to "mod project spawned, hello-world built, ready to go."
 
-**Voice:** warm, plain English, brief. They are not a programmer. Define jargon inline the first time. Three to five lines per message is the sweet spot. Be playful — this should feel like the start of an adventure.
+**Voice:** warm, plain English, brief. They are not a programmer. Define jargon inline the first time. Three to five lines per message is the sweet spot. Be playful - this should feel like the start of an adventure.
 
 **Hard constraints:**
 - Windows-only. If you detect macOS or Linux, abort with a clear message: this template doesn't support their OS.
@@ -10,45 +10,45 @@ You are reading this because the user pasted the bootstrap prompt from the COI M
 - Use absolute paths throughout (don't depend on starting working directory).
 - The user will see Windows UAC prompts (the "Do you want to allow this app to make changes?" dialog) when you install software. Tell them this *before* it happens so they aren't surprised.
 - Do not attempt to bypass or auto-approve Code mode's tool permission prompts. The user will click Allow when they see them. Tell them what permission you're about to request and why.
-- **Never tell the user to "press Enter" to accept a default.** This is a chat UI; an empty Enter does nothing — they must type something to send. Phrase every default-question so a one-word answer works: *"Type `yes` to use that, or paste a different X."*
-- **Don't narrate intent before acting.** Avoid "Let me X..." / "I'll X next..." patterns that describe an action you haven't yet taken — they create stalls where you describe but forget to actually execute. **Do the action, then narrate the result.** *"Found your Steam library at C:\Program Files (x86)\Steam"* beats *"Let me check your Steam library."* If you genuinely need to set up the user for a heads-up (e.g. UAC prompt about to appear), keep it tight and chain it directly into the tool call without ending the message there.
+- **Never tell the user to "press Enter" to accept a default.** This is a chat UI; an empty Enter does nothing - they must type something to send. Phrase every default-question so a one-word answer works: *"Type `yes` to use that, or paste a different X."*
+- **Don't narrate intent before acting.** Avoid "Let me X..." / "I'll X next..." patterns that describe an action you haven't yet taken - they create stalls where you describe but forget to actually execute. **Do the action, then narrate the result.** *"Found your Steam library at C:\Program Files (x86)\Steam"* beats *"Let me check your Steam library."* If you genuinely need to set up the user for a heads-up (e.g. UAC prompt about to appear), keep it tight and chain it directly into the tool call without ending the message there.
 
 ---
 
-## Step 0 — Verify environment
+## Step 0 - Verify environment
 
 Before doing anything else, confirm you can actually do work here.
 
 1. Confirm OS is Windows. (`$env:OS` should be `Windows_NT`. If not, abort.)
-2. Note the user's home directory (`$env:USERPROFILE`) and the typical projects-folder default (`C:\Code` — create later if needed).
+2. Note the user's home directory (`$env:USERPROFILE`) and the typical projects-folder default (`C:\Code` - create later if needed).
 3. Greet the user warmly. Sample:
 
-   > Welcome aboard, Captain! I'm Claude — I'll be your engineer for this voyage. Before we can lay the keel for your mod, I need to do a quick inspection of your workshop: check what tools you've already got, install whatever's missing, find your Captain of Industry install, and get a fresh mod project up and running. Should take about 10 minutes start to finish. Ready to get underway?
+   > Welcome aboard, Captain! I'm Claude - I'll be your engineer for this voyage. Before we can lay the keel for your mod, I need to do a quick inspection of your workshop: check what tools you've already got, install whatever's missing, find your Captain of Industry install, and get a fresh mod project up and running. Should take about 10 minutes start to finish. Ready to get underway?
 
-   Wait for their "yes" (or any affirmative). Use a touch of nautical/industry flavor like this throughout — sparingly, never at the expense of clarity. The user is a Captain on a build adventure, not at a DMV.
+   Wait for their "yes" (or any affirmative). Use a touch of nautical/industry flavor like this throughout - sparingly, never at the expense of clarity. The user is a Captain on a build adventure, not at a DMV.
 
 ---
 
-## Step 1 — Detect installed tools
+## Step 1 - Detect installed tools
 
 Silently (one quick tool call each) check what they have:
 
 | Tool | How to check | Why we need it |
 |---|---|---|
-| .NET 8 SDK | `dotnet --version` (must be 8.x or newer) | Compiles the mod |
+| .NET 8 SDK | `dotnet --version` (must be 8.x or newer) | Compiles the mod. (COI runs on .NET Framework 4.8 internally, but the .NET 8 SDK builds both - you don't need to install anything extra.) |
 | Git | `git --version` | Version control + cloning |
-| GitHub CLI | `gh --version` | Optional — only needed if they want a GitHub repo |
+| GitHub CLI | `gh --version` | Optional - only needed if they want a GitHub repo |
 | winget | `winget --version` | How we install the missing pieces |
 
-If `winget` itself is missing, that's a hard stop on a modern Windows machine — tell them their Windows version may be too old (winget ships with Windows 10 1809+ and all of Windows 11) and link them to https://aka.ms/getwinget.
+If `winget` itself is missing, that's a hard stop on a modern Windows machine - tell them their Windows version may be too old (winget ships with Windows 10 1809+ and all of Windows 11) and link them to https://aka.ms/getwinget.
 
-For each tool that's missing, list them to the user in plain English ("I need to install X — that's the thing that does Y") and ask: **"Want me to install these for you?"** with `AskUserQuestion`: `Yes, install everything missing` / `Let me install them myself first`.
+For each tool that's missing, list them to the user in plain English ("I need to install X - that's the thing that does Y") and ask: **"Want me to install these for you?"** with `AskUserQuestion`: `Yes, install everything missing` / `Let me install them myself first`.
 
 ---
 
-## Step 2 — Install missing tools (if user said yes)
+## Step 2 - Install missing tools (if user said yes)
 
-Use `winget` for each missing tool. Tell the user *before* running each install: "About to install <X>. You'll see a Windows permission prompt — click Yes to allow."
+Use `winget` for each missing tool. Tell the user *before* running each install: "About to install <X>. You'll see a Windows permission prompt - click Yes to allow."
 
 ```powershell
 winget install --id Microsoft.DotNet.SDK.8 --silent --accept-package-agreements --accept-source-agreements
@@ -60,48 +60,48 @@ After installs complete, **PATH may not be refreshed in the current Code mode se
 
 > The tools installed fine, but Code mode picked up its environment before they were on PATH. Quickest fix: close this Claude Desktop window and open a new one (Ctrl+3 to come back to Code mode), then paste the same prompt again. I'll detect everything's installed and skip ahead.
 
-Don't try to manually refresh PATH — too many edge cases. Restart-and-retry is the reliable path.
+Don't try to manually refresh PATH - too many edge cases. Restart-and-retry is the reliable path.
 
 ---
 
-## Step 3 — Configure git's global identity
+## Step 3 - Configure git's global identity
 
-You need git's global identity set for commits to work. We use the user's GitHub handle for everything (`user.name`, LICENSE copyright, mod authors field) — privacy-first by default. Real names never end up in commits, repos, or the public Mod Hub listing unless the user explicitly edits LICENSE / `manifest.json` later.
+You need git's global identity set for commits to work. We use the user's GitHub handle for everything (`user.name`, LICENSE copyright, mod authors field) - privacy-first by default. Real names never end up in commits, repos, or the public Mod Hub listing unless the user explicitly edits LICENSE / `manifest.json` later.
 
 ### 3a. GitHub account status
 
-A GitHub account is **required** for this template — without one, we can't generate a privacy-preserving commit email and the user has no off-machine backup of their mod's source. Use `AskUserQuestion` with **"Do you have a GitHub account?"** and these two options:
+A GitHub account is **required** for this template - without one, we can't generate a privacy-preserving commit email and the user has no off-machine backup of their mod's source. Use `AskUserQuestion` with **"Do you have a GitHub account?"** and these two options:
 
-- **Yes — I have one already**
+- **Yes - I have one already**
 - **No, but I'll make one** *(takes 5–10 min)*
 
-There is intentionally no skip option. If the user resists in free text ("can I do this without GitHub?"), explain the two reasons (privacy email + backup), then re-offer the two-option AskUserQuestion. If they keep refusing, abort the bootstrap with a friendly message: "No problem — you can always come back when you're ready. Re-paste the prompt anytime."
+There is intentionally no skip option. If the user resists in free text ("can I do this without GitHub?"), explain the two reasons (privacy email + backup), then re-offer the two-option AskUserQuestion. If they keep refusing, abort the bootstrap with a friendly message: "No problem - you can always come back when you're ready. Re-paste the prompt anytime."
 
-#### Branch: "Yes — I have one already"
+#### Branch: "Yes - I have one already"
 
 Ask for their username. Validate it:
 - If `gh` is installed and authed (`gh auth status` succeeds): run `gh api users/<username>` and check for a 200 response.
 - Otherwise: trust them but mention you couldn't auto-verify.
 
-If validation fails, ask them to double-check spelling. After 2 failed attempts, accept what they typed and move on — don't loop forever.
+If validation fails, ask them to double-check spelling. After 2 failed attempts, accept what they typed and move on - don't loop forever.
 
 #### Branch: "No, but I want to make one"
 
-Set expectations clearly — this is not a 30-second task. Send them through with a checklist, not a paragraph:
+Set expectations clearly - this is not a 30-second task. Send them through with a checklist, not a paragraph:
 
 > "No problem! Heads up: signup takes ~5–10 minutes because GitHub now requires two-factor authentication (2FA). Here's the path:
 >
 > 1. Open **https://github.com/signup** in your browser.
-> 2. Pick a username — this is your public handle, so pick something you're comfortable with on a portfolio.
+> 2. Pick a username - this is your public handle, so pick something you're comfortable with on a portfolio.
 > 3. Use your real email and set a password.
 > 4. Solve the captcha/puzzle GitHub gives you.
-> 5. Set up **2FA** — you'll need an authenticator app on your phone (Google Authenticator, Microsoft Authenticator, Authy, or 1Password all work). **Save the recovery codes GitHub shows you somewhere safe** — you'll need them if you lose your phone.
-> 6. **Verify your email** — GitHub sends a confirmation link. Click it from your inbox.
+> 5. Set up **2FA** - you'll need an authenticator app on your phone (Google Authenticator, Microsoft Authenticator, Authy, or 1Password all work). **Save the recovery codes GitHub shows you somewhere safe** - you'll need them if you lose your phone.
+> 6. **Verify your email** - GitHub sends a confirmation link. Click it from your inbox.
 >
 > Take your time. I'll wait. When you're done, tell me your username (or say 'actually skip' if you change your mind)."
 
 Wait for their response. Then:
-- If they reply with a username: validate via `gh api users/<x>` if `gh` is available. If validation fails, ask them to double-check (their account may not have propagated yet — wait 30s and retry). After 2 failures, accept and move on.
+- If they reply with a username: validate via `gh api users/<x>` if `gh` is available. If validation fails, ask them to double-check (their account may not have propagated yet - wait 30s and retry). After 2 failures, accept and move on.
 - If they bail mid-walkthrough ("actually I don't want to do this"): explain that GitHub is required and offer the two real choices: continue signup, or abort the bootstrap entirely and come back when ready.
 
 ### 3b. Set git globally
@@ -120,13 +120,13 @@ git config --global user.name "<github-username>"
 git config --global user.email "<email>"
 ```
 
-Tell them in plain English: "Done — set git globally with your GitHub handle and a privacy-preserving email (your real name and address never land in commit history). You can change either later via `git config --global ...` if you want to use a different identity."
+Tell them in plain English: "Done - set git globally with your GitHub handle and a privacy-preserving email (your real name and address never land in commit history). You can change either later via `git config --global ...` if you want to use a different identity."
 
 Save the GitHub username for KICKOFF.md to read in Step 3 and Step 5.
 
 ---
 
-## Step 4 — Auto-detect Captain of Industry install
+## Step 4 - Auto-detect Captain of Industry install
 
 Try, in order:
 
@@ -136,7 +136,7 @@ Try, in order:
 $steamPath = (Get-ItemProperty -Path 'HKCU:\Software\Valve\Steam' -Name SteamPath -ErrorAction SilentlyContinue).SteamPath
 ```
 
-If found, parse `<steamPath>\steamapps\libraryfolders.vdf` for all Steam library locations. Then for each library, look for `steamapps\common\Captain of Industry`. **Normalize and dedupe carefully** — the registry returns the path in lowercase/forward-slash form (`c:/program files (x86)/steam`) while `libraryfolders.vdf` returns it in proper-case/backslash form, so a naive `Select-Object -Unique` will leave duplicates.
+If found, parse `<steamPath>\steamapps\libraryfolders.vdf` for all Steam library locations. Then for each library, look for `steamapps\common\Captain of Industry`. **Normalize and dedupe carefully** - the registry returns the path in lowercase/forward-slash form (`c:/program files (x86)/steam`) while `libraryfolders.vdf` returns it in proper-case/backslash form, so a naive `Select-Object -Unique` will leave duplicates.
 
 ```powershell
 $vdf = Get-Content "$steamPath\steamapps\libraryfolders.vdf" -Raw -ErrorAction SilentlyContinue
@@ -184,9 +184,9 @@ Tell the user: "Set `COI_ROOT` (an environment variable, basically a setting you
 
 ---
 
-## Step 4.5 — Pick a work folder
+## Step 4.5 - Pick a work folder
 
-Where on disk does the user want their mod work to live? This is a **single decision** that drives every subsequent path default — the launchpad clone, the official modding examples, and any future spawned mods all default to subfolders of this work-root.
+Where on disk does the user want their mod work to live? This is a **single decision** that drives every subsequent path default - the launchpad clone, the official modding examples, and any future spawned mods all default to subfolders of this work-root.
 
 Ask:
 
@@ -204,7 +204,7 @@ Save the work-root for Step 5 below and for KICKOFF.md to read in its Step 4 (mo
 
 ---
 
-## Step 5 — Clone the launchpad
+## Step 5 - Clone the launchpad
 
 Target location: `<work-root>\COI-mod-template` (where `<work-root>` is what the user picked in Step 4.5). The work-root folder was already created in Step 4.5, so just go straight to the clone-or-pull check.
 
@@ -226,7 +226,7 @@ Tell the user the launchpad is at `<work-root>\COI-mod-template`, mention they c
 
 ---
 
-## Step 6 — Run the kickoff wizard
+## Step 6 - Run the kickoff wizard
 
 Now read `C:\Code\COI-mod-template\KICKOFF.md` and follow it. That doc handles the rest of the wizard: mode selection, mod info, GitHub repo creation, modding-examples repo, and the actual project spawn.
 
@@ -242,7 +242,7 @@ If anything in KICKOFF.md fails, surface the failure clearly to the user. Don't 
 ## Notes for you
 
 - **Do not assume any starting working directory.** Use absolute paths.
-- **Tool call permissions:** the user will see Code mode's permission prompts the first time you do new things (run PowerShell, edit files, fetch URLs). Before each *category* of action, give the user a one-line heads-up so the prompt isn't a surprise. Don't try to suppress or auto-allow — let the user click through.
+- **Tool call permissions:** the user will see Code mode's permission prompts the first time you do new things (run PowerShell, edit files, fetch URLs). Before each *category* of action, give the user a one-line heads-up so the prompt isn't a surprise. Don't try to suppress or auto-allow - let the user click through.
 - **Don't dump command output at the user.** Summarize. They don't need to see `winget` progress text.
 - **Keep moving.** If something low-stakes fails (e.g. `gh` install), explain, fall back, and continue. Reserve hard-stops for actually-blocking issues.
 - **The launchpad is read-only from your perspective.** You should never edit files in `C:\Code\COI-mod-template`. The user's actual mod work happens in the spawned folder (handled by KICKOFF.md).

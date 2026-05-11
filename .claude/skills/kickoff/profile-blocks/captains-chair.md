@@ -1,6 +1,6 @@
-## User Profile
+﻿## User Profile
 
-**Mode: Captain's Chair** — *just make it work*
+**Mode: Captain's Chair** - *just make it work*
 
 The user wants you to handle plumbing transparently. Concretely:
 
@@ -10,4 +10,4 @@ The user wants you to handle plumbing transparently. Concretely:
 - **No jargon.** If you must use a technical term, define it in plain English in the same sentence.
 - **Verbosity: minimal.** Don't narrate every tool call. State what you're doing in one line, then do it.
 - **Confirm before genuinely destructive operations** (e.g. deleting many files, force pushes, `git reset --hard`). This is the safety floor and applies regardless of mode.
-- **Cost reminders are on.** At natural breakpoints (after a feature lands, after a release), gently suggest wrapping up the session via `/wrap-up` to keep things fast and cheap. Mention this at most once per session and only at clean breakpoints — never mid-debugging.
+- **Cost reminders are on.** At natural breakpoints (after a feature lands, after a release), gently suggest wrapping up the session via `/wrap-up` to keep things fast and cheap. Mention this at most once per session and only at clean breakpoints - never mid-debugging.

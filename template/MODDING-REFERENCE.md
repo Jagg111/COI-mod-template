@@ -1,4 +1,4 @@
-# COI Modding Reference
+﻿# COI Modding Reference
 
 Technical reference for **Captain of Industry** modding (Update 4+). Universal patterns and APIs that apply to most mods.
 
@@ -16,8 +16,8 @@ The most commonly needed facts.
 ```csharp
 bool has = (bool)optionValue.GetType().GetProperty("HasValue").GetValue(optionValue);
 object val = optionValue.GetType().GetProperty("ValueOrNull").GetValue(optionValue);
-// NOTE: There is NO .Value property — use ValueOrNull
-// NOTE: Option<T>.None is a static FIELD, not a property — use GetField("None", ...) not GetProperty
+// NOTE: There is NO .Value property - use ValueOrNull
+// NOTE: Option<T>.None is a static FIELD, not a property - use GetField("None", ...) not GetProperty
 ```
 
 **Logging (anywhere in mod code):**
@@ -26,7 +26,7 @@ Log.Info("MyMod: something happened");
 Log.Warning("MyMod: something looks off");
 Log.Error("MyMod: something broke");
 ```
-Logs land in `%APPDATA%\Captain of Industry\Logs\` — most recent file wins.
+Logs land in `%APPDATA%\Captain of Industry\Logs\` - most recent file wins.
 
 **Resolving a service from DI:**
 ```csharp
@@ -39,27 +39,27 @@ var mgr = resolver.GetResolvedInstance<ResearchManager>().Value;
 
 These are easy to get wrong. Read before writing reflection code.
 
-- **`Option<T>.None` is a static field, not a property** — `GetProperty("None")` silently returns null. Use `GetField("None", BindingFlags.Static | BindingFlags.Public)`.
-- **`Option<T>` has no `.Value` property** — use `ValueOrNull` with a `HasValue` guard.
-- **Many UI windows are lazily created** — they don't exist until the player first opens that screen. Don't grab them at construction time. Defer with `someComponent.RootElement.schedule.Execute(() => { ... })`.
-- **`AmbiguousMatchException` on reflection** — when a type has inherited members with the same name, use `BindingFlags.DeclaredOnly` to disambiguate.
-- **Harmony is NOT bundled with the game** — there's no `0Harmony.dll` in `Managed/`. Reflection has been sufficient for everything. Look for a reflection-based approach before reaching for Harmony.
+- **`Option<T>.None` is a static field, not a property** - `GetProperty("None")` silently returns null. Use `GetField("None", BindingFlags.Static | BindingFlags.Public)`.
+- **`Option<T>` has no `.Value` property** - use `ValueOrNull` with a `HasValue` guard.
+- **Many UI windows are lazily created** - they don't exist until the player first opens that screen. Don't grab them at construction time. Defer with `someComponent.RootElement.schedule.Execute(() => { ... })`.
+- **`AmbiguousMatchException` on reflection** - when a type has inherited members with the same name, use `BindingFlags.DeclaredOnly` to disambiguate.
+- **Harmony is NOT bundled with the game** - there's no `0Harmony.dll` in `Managed/`. Reflection has been sufficient for everything. Look for a reflection-based approach before reaching for Harmony.
 
 ---
 
 ## DLL Inspection Tools
 
 Game install path: set via `COI_ROOT` environment variable.
-Game DLLs: `$env:COI_ROOT\Captain of Industry_Data\Managed\` — primarily `Mafi.dll`, `Mafi.Core.dll`, `Mafi.Base.dll`, `Mafi.Unity.dll`.
+Game DLLs: `$env:COI_ROOT\Captain of Industry_Data\Managed\` - primarily `Mafi.dll`, `Mafi.Core.dll`, `Mafi.Base.dll`, `Mafi.Unity.dll`.
 
 **Game version from DLLs:**
 ```powershell
 [System.Diagnostics.FileVersionInfo]::GetVersionInfo((Join-Path $env:COI_ROOT 'Captain of Industry_Data\Managed\Mafi.Core.dll')).ProductVersion
 # Returns e.g. "0.8.2.0" -- strip trailing ".0" to get "0.8.2"
 ```
-Note: hotfix letter suffixes (e.g. the `c` in `0.8.2c`) are not in DLL metadata — they're only on the game's main menu and in the game's `changelog.txt`.
+Note: hotfix letter suffixes (e.g. the `c` in `0.8.2c`) are not in DLL metadata - they're only on the game's main menu and in the game's `changelog.txt`.
 
-**`inspect_dll.ps1`** — bundled with this template. Inspects any game type:
+**`inspect_dll.ps1`** - bundled with this template. Inspects any game type:
 ```powershell
 # Inspect a specific type in a specific DLL
 powershell -ExecutionPolicy Bypass -File scripts\inspect_dll.ps1 ResearchManager Mafi.Core.dll
@@ -72,12 +72,12 @@ powershell -ExecutionPolicy Bypass -File scripts\inspect_dll.ps1 Toolbar
 ```
 Output includes: inheritance chain, interfaces, constructors, public properties, fields, and methods.
 
-**ILSpy CLI** (`ilspycmd`) — installable via `dotnet tool install -g ilspycmd`. Decompiles game types to readable C#. Essential when you need to understand *how* something works:
+**ILSpy CLI** (`ilspycmd`) - installable via `dotnet tool install -g ilspycmd`. Decompiles game types to readable C#. Essential when you need to understand *how* something works:
 ```bash
 ilspycmd "$COI_ROOT/Captain of Industry_Data/Managed/Mafi.Unity.dll" -t Mafi.Unity.Ui.Some.Type
 ```
 
-**PowerShell reflection** — for quick checks without full decompilation:
+**PowerShell reflection** - for quick checks without full decompilation:
 ```powershell
 $asm = [System.Reflection.Assembly]::LoadFrom("$env:COI_ROOT\Captain of Industry_Data\Managed\Mafi.Unity.dll")
 $type = $asm.GetType('Mafi.Unity.UiToolkit.Library.Panel')
@@ -88,7 +88,7 @@ $type.GetConstructors() | ForEach-Object { $_.GetParameters() }
 
 ## Modding API Resources
 
-- **Official examples repo:** https://github.com/MaFi-Games/Captain-of-industry-modding (cloned locally during `/kickoff` — see CLAUDE.md for path)
+- **Official examples repo:** https://github.com/MaFi-Games/Captain-of-industry-modding (cloned locally during `/kickoff` - see CLAUDE.md for path)
 - **Official wiki (WIP):** https://wiki.coigame.com/Modding
 - **Game assemblies:** `Mafi.dll`, `Mafi.Core.dll`, `Mafi.Base.dll`, `Mafi.Unity.dll`
 - **Discord:** `#modding-dev-general` channel
@@ -100,7 +100,7 @@ $type.GetConstructors() | ForEach-Object { $_.GetParameters() }
 | `DataOnlyMod` | Simple mods that only modify data/prototypes (new buildings, recipes, etc.) |
 | `IMod` | Full mods with UI, lifecycle hooks, DI services |
 
-### `IMod` Implementation (Update 4 — verified working)
+### `IMod` Implementation (Update 4 - verified working)
 
 ```csharp
 public sealed class MyMod : IMod
@@ -115,7 +115,7 @@ public sealed class MyMod : IMod
     // Constructor MUST take ModManifest as first param
     public MyMod(ModManifest manifest) {
         Manifest = manifest;
-        JsonConfig = new ModJsonConfig(this);  // REQUIRED — null crashes the game
+        JsonConfig = new ModJsonConfig(this);  // REQUIRED - null crashes the game
     }
 
     public void Initialize(DependencyResolver resolver, bool gameWasLoaded) { }
@@ -136,17 +136,17 @@ public sealed class MyMod : IMod
 
 ### `IMod` Lifecycle (Official Order)
 
-1. **Constructor** — mod loaded
-2. **`RegisterPrototypes()`** — register all game content (machines, recipes, research, etc.)
-3. **`RegisterDependencies()`** — register custom services with DI container
-4. **`EarlyInit()`** — early initialization before map generation
-5. **`Initialize()`** — final initialization before game starts
+1. **Constructor** - mod loaded
+2. **`RegisterPrototypes()`** - register all game content (machines, recipes, research, etc.)
+3. **`RegisterDependencies()`** - register custom services with DI container
+4. **`EarlyInit()`** - early initialization before map generation
+5. **`Initialize()`** - final initialization before game starts
 
 ### Key Concepts
 
-- **`RegisterPrototypes(ProtoRegistrator)`** — override to add/modify game data
-- **`ModManifest`** — passed to constructor, contains mod metadata at runtime
-- **`[GlobalDependency(RegistrationMode.AsEverything)]`** — attribute that auto-registers a class with the game's dependency injection system
+- **`RegisterPrototypes(ProtoRegistrator)`** - override to add/modify game data
+- **`ModManifest`** - passed to constructor, contains mod metadata at runtime
+- **`[GlobalDependency(RegistrationMode.AsEverything)]`** - attribute that auto-registers a class with the game's dependency injection system
 
 ---
 
@@ -187,7 +187,7 @@ m.Invoke(instance, new object[] { arg1, arg2 });
 
 ### Why a `ReflectionProbe` helper is recommended
 
-Once you start using reflection, the game updating can silently break things — types get renamed, fields move, methods change. A `ReflectionProbe` helper centralizes every reflection call so:
+Once you start using reflection, the game updating can silently break things - types get renamed, fields move, methods change. A `ReflectionProbe` helper centralizes every reflection call so:
 
 1. The mod can self-report at startup which targets resolved and which didn't.
 2. The static diagnostic script (`scripts/check-reflection-targets.ps1`) can scan the source for `ReflectionProbe.*` calls and verify them against the actual game DLLs without running the game.
@@ -199,7 +199,7 @@ When you add reflection to this mod, build the helper *first*. The ResearchQueue
 
 ## Harmony Patching
 
-**Harmony is not bundled with the game** — no `0Harmony.dll` in `Managed/`. Try reflection first.
+**Harmony is not bundled with the game** - no `0Harmony.dll` in `Managed/`. Try reflection first.
 
 If you genuinely need Harmony, **Lib.Harmony v2.2.2** (NuGet package) can be installed:
 
@@ -226,12 +226,12 @@ The DI container used throughout the game. Available in `IMod.Initialize()`, `IM
 
 | Method | Purpose |
 |--------|---------|
-| `GetResolvedInstance<T>()` | Returns `Option<T>` — the resolved instance of a registered type |
+| `GetResolvedInstance<T>()` | Returns `Option<T>` - the resolved instance of a registered type |
 | `TryGetResolvedDependency<T>(out T)` | Returns bool, sets `out` param if found |
 | `Resolve<T>()` | Returns `T` directly (throws if not found) |
 | `TryResolve<T>()` | Returns `Option<T>` |
-| `AllResolvedInstances` | `IEnumerable<object>` — **all** resolved instances. Useful for finding non-public types by type name string matching. |
-| `GetResolvedInstance(Type type)` | Non-generic overload — returns `Option<object>` |
+| `AllResolvedInstances` | `IEnumerable<object>` - **all** resolved instances. Useful for finding non-public types by type name string matching. |
+| `GetResolvedInstance(Type type)` | Non-generic overload - returns `Option<object>` |
 | `Instantiate<T>()` | Creates a new instance with DI constructor injection |
 | `Instantiate<T>(params object[] args)` | Creates with explicit constructor args + DI |
 | `ResolveAll<T>()` | Returns all implementations of an interface |
@@ -294,8 +294,8 @@ Standard setup for Update 4 mods:
 
 ### Hub limits (cannot be edited after upload)
 
-- `display_name` — max 50 chars
-- `description_short` — max 180 chars
+- `display_name` - max 50 chars
+- `description_short` - max 180 chars
 
 Verify before packaging a release.
 
@@ -309,7 +309,7 @@ Mods can expose player-configurable options via a `config.json` file. The game r
 
 | Type | `default` value | Extra fields |
 |---|---|---|
-| Boolean | `true`/`false` | — |
+| Boolean | `true`/`false` | - |
 | String | `"text"` | `max_length`, `regex` |
 | Integer | `42` | `min`, `max`, `is_integer` (must be `true`) |
 | Float | `5.3` | `min`, `max` |
@@ -375,14 +375,14 @@ The mod selection UI:
 
 ## Useful Notes
 
-- Logs at `%APPDATA%\Captain of Industry\Logs\` — check these for mod errors
+- Logs at `%APPDATA%\Captain of Industry\Logs\` - check these for mod errors
 - In-game console command `also_log_to_console` displays log output in the game console
-- `manifest.RootDirectoryPath` — available in mod constructor for accessing mod files at runtime
+- `manifest.RootDirectoryPath` - available in mod constructor for accessing mod files at runtime
 - Discord `#modding-dev-general` is the best place for community + dev support
 
 ---
 
-## Dead Ends — What Doesn't Work in Update 4
+## Dead Ends - What Doesn't Work in Update 4
 
 Approaches that have been tried and confirmed not to work. Do not re-attempt these.
 
@@ -391,7 +391,7 @@ Approaches that have been tried and confirmed not to work. Do not re-attempt the
 | `optionType.GetProperty("None")` | `Option<T>.None` is a **static field**, not a property. `GetProperty` silently returns null. Use `GetField("None", BindingFlags.Static \| BindingFlags.Public)` instead. |
 | `optionType.GetProperty("Value")` | `Option<T>` has no `.Value` property. Use `ValueOrNull` with a `HasValue` guard. |
 | Harmony patching without bundling Harmony yourself | Harmony is not bundled with the game (no `0Harmony.dll` in `Managed/`). The official modding repo makes no mention of it. Reflection has been sufficient for every mod we've seen. |
-| Accessing lazily-created UI windows in `ControllerActivated` on first open | Many UI windows are lazily created — they don't exist yet when `ControllerActivated` fires the first time. Defer with `schedule.Execute()`. |
+| Accessing lazily-created UI windows in `ControllerActivated` on first open | Many UI windows are lazily created - they don't exist yet when `ControllerActivated` fires the first time. Defer with `schedule.Execute()`. |
 
 ---
 
@@ -399,4 +399,4 @@ Approaches that have been tried and confirmed not to work. Do not re-attempt the
 
 > Append findings here as you (or Claude) discover game-specific details relevant to this particular mod. Group by feature or game subsystem. The point of this section is to keep a personalized log so you don't re-do research work later.
 
-(Empty — start filling in as you go.)
+(Empty - start filling in as you go.)

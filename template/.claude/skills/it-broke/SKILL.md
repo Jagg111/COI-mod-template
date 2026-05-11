@@ -1,4 +1,4 @@
----
+﻿---
 name: it-broke
 description: The "help me fix this" button. Reads the latest game log + recent code changes, identifies the actual error, explains it in plain English, and offers a fix.
 disable-model-invocation: true
@@ -8,7 +8,7 @@ This is the highest-leverage skill in the project. The user is stuck and demoral
 
 ## Behavior
 
-1. **Acknowledge briefly.** One sentence — "Let me take a look at the logs." or, when it fits, a Captain-of-Industry-flavored beat like "Heading down to the engine room — let me check the logs." Don't make them wait silently while you read. Don't overdo the flavor; once is enough.
+1. **Acknowledge briefly.** One sentence - "Let me take a look at the logs." or, when it fits, a Captain-of-Industry-flavored beat like "Heading down to the engine room - let me check the logs." Don't make them wait silently while you read. Don't overdo the flavor; once is enough.
 
 2. **Read the latest game log.** Find the newest log file in `%APPDATA%\Captain of Industry\Logs\`:
    ```powershell
@@ -46,24 +46,24 @@ This is the highest-leverage skill in the project. The user is stuck and demoral
    - Propose a fix.
 
    Example (Captain's Chair):
-   > It looks like the game updated and renamed the `IronForge` type to `Foundry`. Your mod is still asking for the old name on line 42 of `MyMod.cs`. I can fix this — should I update it?
+   > It looks like the game updated and renamed the `IronForge` type to `Foundry`. Your mod is still asking for the old name on line 42 of `MyMod.cs`. I can fix this - should I update it?
 
    Example (Apprentice):
-   > Looks like the game updated and renamed `IronForge` to `Foundry`. Your mod still asks for the old name on line 42 of `MyMod.cs`, so when it tries to find the type it gets nothing back and crashes. (By the way: that's what a `NullReferenceException` means — your code tried to use something that wasn't there.) I'll update the name and we'll be back in business.
+   > Looks like the game updated and renamed `IronForge` to `Foundry`. Your mod still asks for the old name on line 42 of `MyMod.cs`, so when it tries to find the type it gets nothing back and crashes. (By the way: that's what a `NullReferenceException` means - your code tried to use something that wasn't there.) I'll update the name and we'll be back in business.
 
    Example (Master):
    > **What happened:** A `NullReferenceException` was thrown on line 42 of `MyMod.cs`. The reflection call is asking for a field called `m_oldName` on `IronForge`, which doesn't exist anymore.
    >
-   > **Why:** The game update renamed `IronForge` to `Foundry` and `m_oldName` to `m_displayName`. Reflection silently returns null when a field isn't found (it's pessimistic-by-default — there's no compile-time check, so the type system can't catch it), then your code crashes when it tries to use the null value as if it were a real object. This is exactly why we wrap reflection lookups in `ReflectionProbe` — it surfaces these mismatches as actionable errors instead of silent nulls.
+   > **Why:** The game update renamed `IronForge` to `Foundry` and `m_oldName` to `m_displayName`. Reflection silently returns null when a field isn't found (it's pessimistic-by-default - there's no compile-time check, so the type system can't catch it), then your code crashes when it tries to use the null value as if it were a real object. This is exactly why we wrap reflection lookups in `ReflectionProbe` - it surfaces these mismatches as actionable errors instead of silent nulls.
    >
    > **Proposed fix:** Update the `ReflectionProbe` call on line 42 to use the new names. Applying now.
 
 6. **Offer to fix.** Behavior depends on User Profile:
    - **All three modes:** propose the fix and apply it (auto-commit follows the per-mode rule). Master gets the deeper "why this works" framing; Apprentice gets a one-line ELI5 aside; Captain's Chair gets the bare proposal.
 
-7. **After fixing:** Run a quick build to confirm it compiles (`dotnet build <SLN_FILE>`) and tell the user the result. If they want a fuller health check on top of the build (manifest valid? reflection targets still good?), they can just ask — *"is everything okay now?"*
+7. **After fixing:** Run a quick build to confirm it compiles (`dotnet build <SLN_FILE>`) and tell the user the result. If they want a fuller health check on top of the build (manifest valid? reflection targets still good?), they can just ask - *"is everything okay now?"*
 
-8. **Before declaring done — document what you learned.** If your investigation surfaced anything not already in `MODDING-REFERENCE.md` — a renamed type, a field that moved, a confusing error pattern, a non-obvious gotcha — append it to the reference now. Debugging mode is the highest-yield discovery path in the project; if you skip this, future-you (or a different session) will redo the investigation. This is non-negotiable per the Documentation Rules in CLAUDE.md.
+8. **Before declaring done - document what you learned.** If your investigation surfaced anything not already in `MODDING-REFERENCE.md` - a renamed type, a field that moved, a confusing error pattern, a non-obvious gotcha - append it to the reference now. Debugging mode is the highest-yield discovery path in the project; if you skip this, future-you (or a different session) will redo the investigation. This is non-negotiable per the Documentation Rules in CLAUDE.md.
 
 ## When you can't figure it out
 
@@ -77,4 +77,4 @@ If after reading logs and code you genuinely don't have a clear hypothesis:
 
 - Don't dump raw stack traces at the user. Translate.
 - If the error is in a part of the codebase the user wrote (not a reflection or game-API issue), still explain it in plain English. Avoid jargon like "null reference exception" without defining it.
-- It's okay to say "I'm not 100% sure but my best guess is X" — wrong-but-honest beats falsely-confident.
+- It's okay to say "I'm not 100% sure but my best guess is X" - wrong-but-honest beats falsely-confident.

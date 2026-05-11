@@ -1,4 +1,4 @@
----
+﻿---
 name: ship-it
 description: Run when code changes are ready to release. Handles pre-flight checks, version bump, AI-drafted What's New bullets (reviewed in-session), changelog.txt update, packaging, and COI Hub upload reminder.
 disable-model-invocation: true
@@ -14,9 +14,9 @@ When the user is ready to publish a new version of the mod, this skill walks thr
 
 | File | What it does |
 |------|-------------|
-| `manifest.json` | Mod ID and version — source of truth for release tags and titles. Read once at the start to learn the mod ID. |
+| `manifest.json` | Mod ID and version - source of truth for release tags and titles. Read once at the start to learn the mod ID. |
 | `changelog.txt` | Cumulative player-facing changelog; updated each release and bundled inside the mod ZIP. |
-| `bin/pkg/whats-new.md` | Release notes draft — written during this workflow as a working buffer. |
+| `bin/pkg/whats-new.md` | Release notes draft - written during this workflow as a working buffer. |
 | `scripts/package-release.ps1` | Packaging script that builds the zip for Hub upload. |
 
 **Test mode:** If the user invoked `/ship-it --test`, follow all steps but:
@@ -110,7 +110,7 @@ Apply any edits the user requests. Once they approve:
    ```
    - Use today's date in `YYYY-MM-DD` format
    - Convert `-` bullet markers to `*`
-   - Strip any markdown link syntax from bullets (plain text only — the Hub renders changelog.txt as plain text)
+   - Strip any markdown link syntax from bullets (plain text only - the Hub renders changelog.txt as plain text)
    - Leave a blank line between this new entry and the previous one
 3. Confirm both files were written.
 
@@ -127,22 +127,22 @@ Update the version number and commit everything together.
    - If the release closes or fixes a GitHub issue, append `Fixes #N` or `Closes #N`
 
 3. **Behavior depends on the user's mode (read CLAUDE.md User Profile block):**
-   - **Captain's Chair / Apprentice** — auto-commit, auto-tag, auto-push:
+   - **Captain's Chair / Apprentice** - auto-commit, auto-tag, auto-push:
      ```
      git add manifest.json changelog.txt
      git commit -m "<suggested message>"
      git tag v<version>
      git push && git push --tags
      ```
-   - **Master** — auto-commit and auto-tag, then **show the push commands and wait** for the user. This is a teaching moment about publishing:
+   - **Master** - auto-commit and auto-tag, then **show the push commands and wait** for the user. This is a teaching moment about publishing:
      ```
      git add manifest.json changelog.txt
      git commit -m "<suggested message>"
      git tag v<version>
      ```
-     Then explain what's next: *"Now your release is committed and tagged locally. To publish, run these — `git push` sends the commit, `git push --tags` sends the version tag separately so people downloading the source can find this exact release. Want me to run them, or do you want to type them yourself?"*
+     Then explain what's next: *"Now your release is committed and tagged locally. To publish, run these - `git push` sends the commit, `git push --tags` sends the version tag separately so people downloading the source can find this exact release. Want me to run them, or do you want to type them yourself?"*
 
-   The git tag is for source archaeology only — the COI Hub is the actual release channel. Tags do not trigger any distribution.
+   The git tag is for source archaeology only - the COI Hub is the actual release channel. Tags do not trigger any distribution.
 
 ---
 
@@ -168,23 +168,23 @@ The COI Hub is the exclusive distribution channel. Players download and install 
 
 Read the mod ID and version from `manifest.json`. Tell the user:
 
-> 🚢 Cargo's loaded — `<MOD_ID>` v<version> is ready to ship.
+> 🚢 Cargo's loaded - `<MOD_ID>` v<version> is ready to ship.
 >
 > Your release zip is at `bin\pkg\<MOD_ID>-v<version>.zip`.
 >
 > Upload it to the [COI Mod Hub](https://hub.coigame.com) via "upload new version" on your mod's page. (First release? Create a new mod listing first.)
 >
-> - The Hub auto-parses `changelog.txt` from inside the zip — no copy-paste needed.
+> - The Hub auto-parses `changelog.txt` from inside the zip - no copy-paste needed.
 > - License is set once at first upload and persists across versions.
 > - Mark the version as **Stable** (or **Beta** if it's a pre-release).
 
-Conclude with something fun and lighthearted — a "she's seaworthy" / "all hands celebrated" / "v<version> is on the shipping lane" beat works well. Sprinkle, don't pour.
+Conclude with something fun and lighthearted - a "she's seaworthy" / "all hands celebrated" / "v<version> is on the shipping lane" beat works well. Sprinkle, don't pour.
 
 ---
 
 ## Notes
 
 - The What's New bullets are written for players, not developers. Commits that only affect build scripts, docs, or code comments are intentionally left out of the release notes.
-- `changelog.txt` is plain text — strip markdown link syntax when writing to it. The Hub does not render markdown.
+- `changelog.txt` is plain text - strip markdown link syntax when writing to it. The Hub does not render markdown.
 - `scripts/package-release.ps1` can also be run standalone outside of this workflow if needed, as long as `changelog.txt` exists and is up to date.
 - The COI Hub does NOT provide automatic updates to players. Players must manually download and install each new version.

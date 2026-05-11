@@ -1,4 +1,4 @@
----
+﻿---
 name: wrap-up
 description: Wrap the current session at a clean breakpoint. Summarizes what was done, commits any uncommitted work, writes a handoff note for the next session, and tells the user how to start fresh.
 disable-model-invocation: true
@@ -55,13 +55,13 @@ Long sessions get expensive and slow. This skill is the clean exit ramp. Run it 
    >
    > <summary>
    >
-   > Notes are tucked in `NEXT-SESSION.md` for next time. To pick this back up later, open a new Claude session in this folder and say "continue where we left off" — I'll catch up from the logbook.
+   > Notes are tucked in `NEXT-SESSION.md` for next time. To pick this back up later, open a new Claude session in this folder and say "continue where we left off" - I'll catch up from the logbook.
    >
-   > Fair winds, Captain. <one short closing line — something fun, lightly nautical/industrial when it fits, never forced.>
+   > Fair winds, Captain. <one short closing line - something fun, lightly nautical/industrial when it fits, never forced.>
 
    Examples of a good closing line: "The factory hums on without us." / "Save the world another day." / "Steam up, see you next shift." Don't reuse the same one twice in a row.
 
-6. **Don't actually close anything.** This skill doesn't kill the session — that's the user's call. It just wraps things up cleanly so they *can* close.
+6. **Don't actually close anything.** This skill doesn't kill the session - that's the user's call. It just wraps things up cleanly so they *can* close.
 
 ## When to suggest this skill (without being asked)
 
@@ -79,5 +79,5 @@ Never suggest wrap-up:
 
 ## Notes
 
-- `NEXT-SESSION.md` is the project's living "where were we" document. It evolves over time. It's intentionally short — long handoffs don't get read.
+- `NEXT-SESSION.md` is the project's living "where were we" document. It evolves over time. It's intentionally short - long handoffs don't get read.
 - If `NEXT-SESSION.md` exists at the start of a session, the next Claude should read it as part of orienting.

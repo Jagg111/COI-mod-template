@@ -1,4 +1,4 @@
----
+﻿---
 name: game-version-check
 description: Run after a Captain of Industry game update. Compares game version, runs reflection diagnostics, guides manual in-game testing, analyzes logs, and prompts for version bump if needed.
 disable-model-invocation: true
@@ -8,9 +8,9 @@ Walk through each step in order. Stop and report clearly if anything fails.
 
 ## What this does and why
 
-This mod likely depends on internal game code that isn't part of any official modding API. When the game updates, those internal references can change — renamed, moved, or removed entirely. This skill runs a full compatibility check: it verifies the game version, checks all internal references offline, walks the user through manual in-game testing, then analyzes the game log to confirm everything lines up.
+This mod likely depends on internal game code that isn't part of any official modding API. When the game updates, those internal references can change - renamed, moved, or removed entirely. This skill runs a full compatibility check: it verifies the game version, checks all internal references offline, walks the user through manual in-game testing, then analyzes the game log to confirm everything lines up.
 
-If your mod doesn't use reflection at all, the offline diagnostic will report 0 targets and that's fine — proceed straight to manual testing.
+If your mod doesn't use reflection at all, the offline diagnostic will report 0 targets and that's fine - proceed straight to manual testing.
 
 ## Key files
 
@@ -25,7 +25,7 @@ If your mod doesn't use reflection at all, the offline diagnostic will report 0 
 
 ## Step 0 -- Determine game version and compare
 
-> ⚠️ Use the **PowerShell tool** (not Bash) for all commands in this skill — the Bash tool strips `$` variable references and will fail.
+> ⚠️ Use the **PowerShell tool** (not Bash) for all commands in this skill - the Bash tool strips `$` variable references and will fail.
 
 1. Read the first line of the game's `changelog.txt`:
    ```powershell
@@ -35,14 +35,14 @@ If your mod doesn't use reflection at all, the offline diagnostic will report 0 
 
 2. If `COI_ROOT` is not set or the file is not found, ask the user: "I couldn't read the game version from the install directory. What version of Captain of Industry are you running? (You can find this on the game's main menu.)"
 
-3. Read `manifest.json` and extract `max_verified_game_version`. If the field is missing entirely, treat it as "never verified" — that's an automatic version mismatch.
+3. Read `manifest.json` and extract `max_verified_game_version`. If the field is missing entirely, treat it as "never verified" - that's an automatic version mismatch.
 
 4. Show the user a clear comparison:
    - **Current game version:** (what you found, e.g. `0.8.2c`)
    - **Max verified version in manifest:** (what manifest says, or "(not set)")
-   - **Match?** Yes / No — note that `0.8.2c` vs `0.8.2` is a **No** (hotfix suffix differences count as a mismatch)
+   - **Match?** Yes / No - note that `0.8.2c` vs `0.8.2` is a **No** (hotfix suffix differences count as a mismatch)
 
-5. Remember whether these versions match — needed in Step 5.
+5. Remember whether these versions match - needed in Step 5.
 
 Continue to Step 1.
 
@@ -58,10 +58,10 @@ powershell -ExecutionPolicy Bypass -File scripts\check-reflection-targets.ps1
 
 Always show the user the full output. The results break down into:
 
-- **PASS** — the mod can find this internal game reference.
-- **FAIL** — the game changed and the mod can't find this anymore. Needs a code fix.
-- **SKIP** — uses a dynamic type that can only be checked by actually running the game. The mod's built-in health check (in the game log at startup) verifies these.
-- **0 targets found** — either this mod doesn't use reflection, or doesn't use the `ReflectionProbe` helper pattern. Both fine. Continue to Step 2.
+- **PASS** - the mod can find this internal game reference.
+- **FAIL** - the game changed and the mod can't find this anymore. Needs a code fix.
+- **SKIP** - uses a dynamic type that can only be checked by actually running the game. The mod's built-in health check (in the game log at startup) verifies these.
+- **0 targets found** - either this mod doesn't use reflection, or doesn't use the `ReflectionProbe` helper pattern. Both fine. Continue to Step 2.
 
 ### If everything passes
 
@@ -86,7 +86,7 @@ Explain to the user in plain language what broke. For each failed target:
    dotnet build <SLN_FILE>
    powershell -ExecutionPolicy Bypass -File scripts\check-reflection-targets.ps1
    ```
-   (Read the `.sln` filename from the directory — it'll match the mod ID.)
+   (Read the `.sln` filename from the directory - it'll match the mod ID.)
 
 4. Repeat until all static checks pass. Only then continue to Step 2.
 
@@ -94,12 +94,12 @@ Explain to the user in plain language what broke. For each failed target:
 
 ## Step 2 -- Manual in-game testing
 
-Time to test the mod in the actual game. The exact checklist depends on what this mod does — read `CLAUDE.md` and `README.md` to figure out what features need testing, then build a checklist tailored to this mod.
+Time to test the mod in the actual game. The exact checklist depends on what this mod does - read `CLAUDE.md` and `README.md` to figure out what features need testing, then build a checklist tailored to this mod.
 
 If the mod is brand new ("hello world" stage with just a log message), the checklist is short:
 1. Launch the game.
 2. Load any save (or start a new one).
-3. Open `%APPDATA%\Captain of Industry\Logs\` — the most recent log file should contain your mod's startup message.
+3. Open `%APPDATA%\Captain of Industry\Logs\` - the most recent log file should contain your mod's startup message.
 
 For more developed mods, write a feature-by-feature checklist like:
 
@@ -155,9 +155,9 @@ If there are any failures or discrepancies from Steps 1, 2, or 3:
 - Pull the log again after re-testing.
 - Continue until all issues are resolved.
 
-If everything passed cleanly, skip this step and declare: "All clear — the mod is fully compatible with this game version."
+If everything passed cleanly, skip this step and declare: "All clear - the mod is fully compatible with this game version."
 
-**Before continuing — document what you learned.** Any rename, type move, signature change, or new gotcha you discovered while diagnosing belongs in `MODDING-REFERENCE.md`. Game-update findings are especially valuable because they tend to recur across game updates. Add an entry with the old name, the new name, and one line of context. This is non-negotiable per the Documentation Rules in CLAUDE.md.
+**Before continuing - document what you learned.** Any rename, type move, signature change, or new gotcha you discovered while diagnosing belongs in `MODDING-REFERENCE.md`. Game-update findings are especially valuable because they tend to recur across game updates. Add an entry with the old name, the new name, and one line of context. This is non-negotiable per the Documentation Rules in CLAUDE.md.
 
 Continue to Step 5.
 
@@ -182,9 +182,9 @@ If they differ and all checks passed:
    ```
    Push behavior follows mode:
    - **Captain's Chair / Apprentice:** auto-push if a remote is configured.
-   - **Master:** do NOT auto-push. Tell the user it's saved locally and offer to push (*"want me to push, or hold off?"*) — first time per session, briefly explain that committing saves locally and pushing makes it visible online.
+   - **Master:** do NOT auto-push. Tell the user it's saved locally and offer to push (*"want me to push, or hold off?"*) - first time per session, briefly explain that committing saves locally and pushing makes it visible online.
 
-5. Tell the user: "Version reference updated. You can now run `/ship-it` to publish a new release. Once the release is out, don't forget to update the max-verified-game-version on your Hub listing — that step is manual."
+5. Tell the user: "Version reference updated. You can now run `/ship-it` to publish a new release. Once the release is out, don't forget to update the max-verified-game-version on your Hub listing - that step is manual."
 
 ---
 
@@ -192,11 +192,11 @@ If they differ and all checks passed:
 
 If the mod uses a `ReflectionProbe` helper, it likely has built-in safety:
 
-1. **Health check log** — On startup, the mod writes a report to the game log showing exactly what resolved and what's missing. Look for the `=== Health Check ===` block.
-2. **Graceful degradation** — If some features can't work, the mod can disable just those features instead of crashing.
+1. **Health check log** - On startup, the mod writes a report to the game log showing exactly what resolved and what's missing. Look for the `=== Health Check ===` block.
+2. **Graceful degradation** - If some features can't work, the mod can disable just those features instead of crashing.
 
-If the mod has neither, suggest adding them — they make the next game update much less stressful.
+If the mod has neither, suggest adding them - they make the next game update much less stressful.
 
 ## Notes
 
-- Some targets are marked SKIP because they depend on types that only exist at runtime. The offline diagnostic can't check these — the in-game health check handles them.
+- Some targets are marked SKIP because they depend on types that only exist at runtime. The offline diagnostic can't check these - the in-game health check handles them.

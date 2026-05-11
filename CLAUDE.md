@@ -1,4 +1,4 @@
-# COI Mod Template — Launchpad
+﻿# COI Mod Template - Launchpad
 
 ## What this repo is
 
@@ -6,7 +6,7 @@ A **launchpad**, not a workspace. Users clone this repo, run `/kickoff`, and get
 
 If you're reading this, you're either:
 - A maintainer working on improving the template, OR
-- A user who accidentally opened the wrong folder — if so, you want to be in your *spawned* mod folder, not here.
+- A user who accidentally opened the wrong folder - if so, you want to be in your *spawned* mod folder, not here.
 
 ## Repo structure
 
@@ -60,7 +60,7 @@ Files in `template/` use `{{LIKE_THIS}}` placeholders that `/kickoff` substitute
 
 - **Don't accidentally trigger placeholders during edits.** If you're editing a file in `template/` and need to write a literal `{{` or `}}`, you'll need to escape it somehow at substitution time. So far this hasn't come up in practice.
 - **The spawned `CLAUDE.md` is the most important file.** Everything that affects how Claude behaves with the spawned project lives there. Test changes by spawning a real project (run `/kickoff` against a throwaway folder) and verifying the resulting `CLAUDE.md` reads correctly.
-- **Changes to skills carry through to all *future* spawned projects.** Existing spawned projects don't auto-update — they own their copies. That's deliberate; don't try to make skills central.
+- **Changes to skills carry through to all *future* spawned projects.** Existing spawned projects don't auto-update - they own their copies. That's deliberate; don't try to make skills central.
 - **The launchpad is `master`-branched.** Tag releases of the template if it stabilizes.
 
 ## Working style
