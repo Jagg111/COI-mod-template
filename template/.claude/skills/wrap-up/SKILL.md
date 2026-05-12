@@ -24,8 +24,8 @@ Long sessions get expensive and slow. This skill is the clean exit ramp. Run it 
    git commit -m "Wrap-up snapshot: <summary>"
    ```
    Then push behavior follows the user's mode:
-   - **Captain's Chair / Apprentice:** if a remote is configured, run `git push` automatically.
-   - **Master:** do NOT auto-push. Tell the user the wrap-up snapshot saved locally and pushing is their call. Offer: *"Want me to push these changes to GitHub before we close out, or hold off?"*
+   - **Just Build It / Build It + Teach Me:** if a remote is configured, run `git push` automatically.
+   - **Teach Me Everything:** do NOT auto-push. Tell the user the wrap-up snapshot saved locally and pushing is their call. Offer: *"Want me to push these changes to GitHub before we close out, or hold off?"*
 
 4. **Write a handoff note** to a file at the repo root called `NEXT-SESSION.md`. Overwrite if it exists. Format:
 

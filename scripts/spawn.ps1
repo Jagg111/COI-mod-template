@@ -15,7 +15,7 @@ param(
     [Parameter(Mandatory = $true)] [string] $ModDescriptionLong,
     [Parameter(Mandatory = $true)] [string] $ModAuthor,
     [Parameter(Mandatory = $false)] [string] $GithubUsername = '',
-    [Parameter(Mandatory = $true)] [ValidateSet('Captain''s Chair','Apprentice','Master')] [string] $UserMode,
+    [Parameter(Mandatory = $true)] [ValidateSet('Just Build It','Build It + Teach Me','Teach Me Everything')] [string] $UserMode,
     [Parameter(Mandatory = $false)] [string] $ModdingRepoPath = '(not cloned)'
 )
 
@@ -40,9 +40,9 @@ $TargetPath = (Resolve-Path -LiteralPath $TargetPath).Path
 # --- Load profile block ---------------------------------------------------------
 
 $modeSlug = switch ($UserMode) {
-    "Captain's Chair"     { 'captains-chair' }
-    'Apprentice'          { 'apprentice' }
-    'Master'              { 'master' }
+    'Just Build It'        { 'no-teaching' }
+    'Build It + Teach Me'  { 'teach-as-we-go' }
+    'Teach Me Everything'  { 'deep-teaching' }
 }
 $profileBlockPath = Join-Path $LaunchpadPath ".claude/skills/kickoff/profile-blocks/$modeSlug.md"
 if (-not (Test-Path -LiteralPath $profileBlockPath)) {

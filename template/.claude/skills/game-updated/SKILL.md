@@ -181,8 +181,8 @@ If they differ and all checks passed:
    git commit -m "Update max verified game version to <version>"
    ```
    Push behavior follows mode:
-   - **Captain's Chair / Apprentice:** auto-push if a remote is configured.
-   - **Master:** do NOT auto-push. Tell the user it's saved locally and offer to push (*"want me to push, or hold off?"*) - first time per session, briefly explain that committing saves locally and pushing makes it visible online.
+   - **Just Build It / Build It + Teach Me:** auto-push if a remote is configured.
+   - **Teach Me Everything:** do NOT auto-push. Tell the user it's saved locally and offer to push (*"want me to push, or hold off?"*) - first time per session, briefly explain that committing saves locally and pushing makes it visible online.
 
 5. Tell the user: "Version reference updated. You can now run `/ship-it` to publish a new release. Once the release is out, don't forget to update the max-verified-game-version on your Hub listing - that step is manual."
 

@@ -20,7 +20,7 @@ A few tips if Claude Code is new to you:
 - **If something breaks**, type `/it-broke` and Claude will read the game logs, diagnose what went wrong, and propose a fix. You don't need to look at logs yourself.
 - **End each working session with `/wrap-up`.** It saves your progress and writes a quick handoff note so the next session picks up cleanly.
 
-> 🎚️ You're working with Claude in **{{USER_MODE}}** mode (see `CLAUDE.md` for what that means and what to expect). You can change modes later by editing the `## User Profile` section there.
+> 🎚️ You're working with Claude in **{{USER_MODE}}** mode — that's about how much Claude explains as you go, not how capable it is. See `CLAUDE.md` for the details. You can switch modes anytime by editing the `## User Profile` section there.
 
 ---
 

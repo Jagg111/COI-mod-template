@@ -45,13 +45,13 @@ This is the highest-leverage skill in the project. The user is stuck and demoral
    - Say what file and line is involved (if you know).
    - Propose a fix.
 
-   Example (Captain's Chair):
+   Example (Just Build It):
    > It looks like the game updated and renamed the `IronForge` type to `Foundry`. Your mod is still asking for the old name on line 42 of `MyMod.cs`. I can fix this - should I update it?
 
-   Example (Apprentice):
+   Example (Build It + Teach Me):
    > Looks like the game updated and renamed `IronForge` to `Foundry`. Your mod still asks for the old name on line 42 of `MyMod.cs`, so when it tries to find the type it gets nothing back and crashes. (By the way: that's what a `NullReferenceException` means - your code tried to use something that wasn't there.) I'll update the name and we'll be back in business.
 
-   Example (Master):
+   Example (Teach Me Everything):
    > **What happened:** A `NullReferenceException` was thrown on line 42 of `MyMod.cs`. The reflection call is asking for a field called `m_oldName` on `IronForge`, which doesn't exist anymore.
    >
    > **Why:** The game update renamed `IronForge` to `Foundry` and `m_oldName` to `m_displayName`. Reflection silently returns null when a field isn't found (it's pessimistic-by-default - there's no compile-time check, so the type system can't catch it), then your code crashes when it tries to use the null value as if it were a real object. This is exactly why we wrap reflection lookups in `ReflectionProbe` - it surfaces these mismatches as actionable errors instead of silent nulls.
@@ -59,7 +59,7 @@ This is the highest-leverage skill in the project. The user is stuck and demoral
    > **Proposed fix:** Update the `ReflectionProbe` call on line 42 to use the new names. Applying now.
 
 6. **Offer to fix.** Behavior depends on User Profile:
-   - **All three modes:** propose the fix and apply it (auto-commit follows the per-mode rule). Master gets the deeper "why this works" framing; Apprentice gets a one-line ELI5 aside; Captain's Chair gets the bare proposal.
+   - **All three modes:** propose the fix and apply it (auto-commit follows the per-mode rule). Teach Me Everything gets the deeper "why this works" framing; Build It + Teach Me gets a one-line ELI5 aside; Just Build It gets the bare proposal.
 
 7. **After fixing:** Run a quick build to confirm it compiles (`dotnet build <SLN_FILE>`) and tell the user the result. If they want a fuller health check on top of the build (manifest valid? reflection targets still good?), they can just ask - *"is everything okay now?"*
 

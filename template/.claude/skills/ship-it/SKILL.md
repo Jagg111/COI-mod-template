@@ -127,14 +127,14 @@ Update the version number and commit everything together.
    - If the release closes or fixes a GitHub issue, append `Fixes #N` or `Closes #N`
 
 3. **Behavior depends on the user's mode (read CLAUDE.md User Profile block):**
-   - **Captain's Chair / Apprentice** - auto-commit, auto-tag, auto-push:
+   - **Just Build It / Build It + Teach Me** - auto-commit, auto-tag, auto-push:
      ```
      git add manifest.json changelog.txt
      git commit -m "<suggested message>"
      git tag v<version>
      git push && git push --tags
      ```
-   - **Master** - auto-commit and auto-tag, then **show the push commands and wait** for the user. This is a teaching moment about publishing:
+   - **Teach Me Everything** - auto-commit and auto-tag, then **show the push commands and wait** for the user. This is a teaching moment about publishing:
      ```
      git add manifest.json changelog.txt
      git commit -m "<suggested message>"

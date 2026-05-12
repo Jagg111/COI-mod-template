@@ -34,11 +34,15 @@ Wait for confirmation. If BOOTSTRAP.md already greeted them, just transition: "W
 
 This is the single most important question. It drives Claude's behavior in the spawned project.
 
-Use `AskUserQuestion` with **"How do you want to work with me?"** and these four options:
+Add a short framing line before the question so the user understands what they're choosing:
 
-- **Captain's Chair** - *just make it work.* Auto-commit + auto-push as we go. No teaching moments, minimal narration, plain English only. You focus on the mod; I handle every line of git underneath. *(Claude still checks with you before anything irreversible — it just skips the lessons.)*
-- **Apprentice** - *teach me as we go.* Same auto-commit + auto-push as Captain's Chair. Plus: I'll explain what's happening in plain ELI5 terms as we work - short asides like *"that thing I just did is called X - it's how Y works"* - so you naturally pick up modding concepts while we build. Medium teaching, medium narration.
-- **Master** - *I want to master this craft.* Deep-dive learning mode. Auto-commit (git stays out of your way), but **no auto-push** - you'll trigger pushes yourself, which means you'll pick up that one piece of git. Plus: maximum narration AND concept-level teaching - I take time to explain how things work under the hood, why they're designed that way, and how they connect. Slowest, highest token cost; you'll actually learn the craft.
+> "These modes are about how I talk to you — not about how capable I am. All three build the same mod. The difference is how much I explain along the way."
+
+Use `AskUserQuestion` with **"How do you want to work with me?"** and these three options — list them in this order, with the recommended one first:
+
+- **Build It + Teach Me** - *explain it as we go, no jargon.* Auto-commit + auto-push as we go. Whenever I do something non-obvious I'll drop a short aside in plain English — using analogies, no coding background assumed. You pick up how the mod works without having to ask.
+- **Just Build It** - *just make it work.* Auto-commit + auto-push as we go. No teaching moments, minimal narration, plain English only. You focus on the mod; I handle every line of git underneath. *(Claude still checks with you before anything irreversible — it just skips the lessons.)*
+- **Teach Me Everything** - *I want to understand how this all works.* Deep-dive learning mode. Auto-commit (git stays out of your way), but **no auto-push** - you'll trigger pushes yourself. Plus: maximum narration AND concept-level teaching — I take time to explain how things work under the hood, why they're designed that way, and how they connect. Slowest, highest token cost; you'll actually learn the craft.
 
 Save the exact label string they pick - `spawn.ps1` accepts these verbatim.
 
@@ -81,7 +85,7 @@ If the path already exists:
 
 ## Step 5 - GitHub repo for this mod
 
-The user has a GitHub account (BOOTSTRAP.md ensures that). Now ask whether to create a repo for *this specific mod*. Use `AskUserQuestion` with **"Want me to create a GitHub repo for this mod?"**:
+Ask whether to create a GitHub repo for *this specific mod*. If the user skipped GitHub in BOOTSTRAP.md (empty GitHub username), tell them upfront that the first two options won't work yet — they'll need to set up a GitHub account first (offer to help after the mod is spawned). Use `AskUserQuestion` with **"Want me to create a GitHub repo for this mod?"**:
 
 - **Yes, public** - best for sharing and getting help (recommended)
 - **Yes, private** - start private, you can flip it public later
@@ -159,7 +163,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Code\COI-mod-template\sc
     -ModDescriptionLong "<long>" `
     -ModAuthor "<github-username>" `
     -GithubUsername "<github-username>" `
-    -UserMode "<one of: Captain's Chair, Apprentice, Master>" `
+    -UserMode "<one of: Just Build It, Build It + Teach Me, Teach Me Everything>" `
     -ModdingRepoPath "<modding-repo-path-or-(not cloned)>"
 ```
 

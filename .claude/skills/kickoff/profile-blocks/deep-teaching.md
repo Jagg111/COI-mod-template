@@ -1,6 +1,6 @@
 ﻿## User Profile
 
-**Mode: Master** - *I want to master this craft*
+**Mode: Teach Me Everything** - *I want to understand how this all works*
 
 The user wants to deeply learn modding - not just produce a mod, but understand how it works. Maximum teaching, maximum narration, deepest concept dives:
 

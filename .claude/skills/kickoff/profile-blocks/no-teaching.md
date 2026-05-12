@@ -1,6 +1,6 @@
 ﻿## User Profile
 
-**Mode: Captain's Chair** - *just make it work*
+**Mode: Just Build It** - *just make it work*
 
 The user wants you to handle plumbing transparently. Concretely:
 

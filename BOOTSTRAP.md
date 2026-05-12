@@ -70,14 +70,13 @@ You need git's global identity set for commits to work. We use the user's GitHub
 
 ### 3a. GitHub account status
 
-A GitHub account is **required** for this template - without one, we can't generate a privacy-preserving commit email and the user has no off-machine backup of their mod's source. Use `AskUserQuestion` with **"Do you have a GitHub account?"** and these two options:
+A GitHub account is **strongly recommended** - it's how your mod gets backed up off your machine, and serves as a great (free) place to store code based projects like mods. But it's not a hard requirement to get started. Use `AskUserQuestion` with **"Do you have a GitHub account?"** and these three options:
 
-- **Yes - I have one already**
-- **No, but I'll make one** *(takes 5–10 min)*
+- **Yes — I have one already**
+- **No, I'll make one** *(takes 5–10 min)*
+- **Skip for now — I'll set it up later**
 
-There is intentionally no skip option. If the user resists in free text ("can I do this without GitHub?"), explain the two reasons (privacy email + backup), then re-offer the two-option AskUserQuestion. If they keep refusing, abort the bootstrap with a friendly message: "No problem - you can always come back when you're ready. Re-paste the prompt anytime."
-
-#### Branch: "Yes - I have one already"
+#### Branch: "Yes — I have one already"
 
 Ask for their username. Validate it:
 - If `gh` is installed and authed (`gh auth status` succeeds): run `gh api users/<username>` and check for a 200 response.
@@ -85,7 +84,7 @@ Ask for their username. Validate it:
 
 If validation fails, ask them to double-check spelling. After 2 failed attempts, accept what they typed and move on - don't loop forever.
 
-#### Branch: "No, but I want to make one"
+#### Branch: "No, I'll make one"
 
 Set expectations clearly - this is not a 30-second task. Send them through with a checklist, not a paragraph:
 
@@ -102,11 +101,32 @@ Set expectations clearly - this is not a 30-second task. Send them through with 
 
 Wait for their response. Then:
 - If they reply with a username: validate via `gh api users/<x>` if `gh` is available. If validation fails, ask them to double-check (their account may not have propagated yet - wait 30s and retry). After 2 failures, accept and move on.
-- If they bail mid-walkthrough ("actually I don't want to do this"): explain that GitHub is required and offer the two real choices: continue signup, or abort the bootstrap entirely and come back when ready.
+- If they bail mid-walkthrough ("actually I don't want to do this"): re-offer all three options. No hard stop - they can skip.
+
+#### Branch: "Skip for now — I'll set it up later"
+
+Ask for a name to use in git commits - any name or nickname they're comfortable with:
+
+> "No problem - you can add GitHub later. What name should I use for your git commits? Could be your first name, a username, whatever you like - this only shows up in your local commit history for now."
+
+Wait for their answer. Then set a local git identity using that name and a placeholder email:
+
+```powershell
+git config --global user.name "<their-name>"
+git config --global user.email "local-modder@localhost"
+```
+
+Warn them clearly before moving on:
+
+> "⚠️ **Heads up:** Without GitHub, your mod only exists on this computer. If your drive fails or you reinstall Windows, the mod is gone. I'd strongly recommend adding GitHub later — type `/it-broke` in your mod folder and ask me to help set it up, or just re-run the setup prompt from the README anytime. For now, let's keep going."
+
+Save an empty string as the GitHub username and continue to Step 4. When KICKOFF.md asks about creating a GitHub repo (Step 5), the user will need to pick "Not now" — tell them this at handoff time so it isn't a surprise.
 
 ### 3b. Set git globally
 
-By the end of 3a you have a GitHub username. Use it for `user.name` and pair it with the GitHub noreply domain for the email:
+**Skip this step if the user chose "Skip for now" in 3a** — git identity was already set in that branch using a placeholder.
+
+By the end of 3a (for the "Yes" and "No, I'll make one" branches) you have a GitHub username. Use it for `user.name` and pair it with the GitHub noreply domain for the email:
 
 | Situation | Email format |
 |---|---|

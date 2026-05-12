@@ -33,18 +33,18 @@ You will need to use **Claude Desktop in Code mode** specifically, not Chat mode
 
 ---
 
-## 🐙 Required: a GitHub account
+## 🐙 Strongly recommended: a GitHub account
 
-You'll need a free GitHub account for this. Two reasons:
-1. **Privacy-preserving commits.** Without an account, we can't generate the email format that keeps your real address out of public commit history.
-2. **Backup.** Your mod's code lives on GitHub. Without it, a hard drive failure = your mod is gone.
+GitHub is a free service that acts as an off-site backup and home for your mod's code. You don't need it to get started, but **without it, your mod only exists on your computer** — a hard drive failure or Windows reinstall could wipe it out. It also makes it easy to share your mod with others or get help if something goes wrong.
 
 If you already have one, you're set. Move on to Setup below.
 
-If you don't:
+If you don't, you have two options:
 
 - **Make one now at [github.com/signup](https://github.com/signup).** Takes about **5–10 minutes**, mostly because GitHub now requires two-factor authentication (2FA). You'll need an authenticator app on your phone like Google Authenticator, Microsoft Authenticator, Authy, or 1Password. GitHub will also have you solve a quick puzzle and verify your email.
-- **Or let Claude walk you through it during setup.** Same steps, but inline with the rest of onboarding. Adds ~5–10 minutes to the whole flow.
+- **Skip it for now.** Claude will warn you about the risk, set up a basic local identity, and let you keep going. You can add GitHub any time later — just ask Claude to help you set it up from inside your mod folder.
+
+Either way, Claude will walk you through it during setup.
 
 ---
 
