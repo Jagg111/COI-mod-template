@@ -166,17 +166,52 @@ Stream the output. If the script fails, show the full error and stop.
 
 The COI Hub is the exclusive distribution channel. Players download and install updates manually from there.
 
-Read the mod ID and version from `manifest.json`. Tell the user:
+Read the mod ID and version from `manifest.json`. Check `git tag` output or the Hub listing to determine whether this is the **first release** or a **new version** of an existing listing, then give the user the matching walkthrough below.
 
-> 🚢 Cargo's loaded - `<MOD_ID>` v<version> is ready to ship.
+---
+
+### If this is a new version of an existing listing
+
+Tell the user:
+
+> Your release zip is at `scripts\releases\<MOD_ID>-v<version>.zip`.
 >
-> Your release zip is at `bin\pkg\<MOD_ID>-v<version>.zip`.
+> To upload:
+> 1. Go to [hub.coigame.com](https://hub.coigame.com) and open your mod's page (log in first).
+> 2. Look for **"Upload new version"** or **"Add version"** -- it appears once you're logged in as the owner.
+> 3. Attach the zip from `scripts\releases\`.
+> 4. Update the **game version compatibility range** if a COI update has dropped since your last release.
+> 5. Set status: **Stable** (or **Beta** for a pre-release).
+> 6. Submit -- the Hub reads `changelog.txt` from inside the zip automatically. No copy-paste needed.
+
+---
+
+### If this is the first release (new listing)
+
+Tell the user:
+
+> You're publishing for the first time, so you'll create a new listing on the Hub. Here's the critical path:
 >
-> Upload it to the [COI Mod Hub](https://hub.coigame.com) via "upload new version" on your mod's page. (First release? Create a new mod listing first.)
+> 1. Go to [hub.coigame.com](https://hub.coigame.com), log in (or Register), click **Mods** in the top nav, then click **ADD MOD**.
+> 2. On the "Upload a mod" page: drag `scripts\releases\<MOD_ID>-v<version>.zip` onto the upload area (or click **CHOOSE ZIP**), check the Modding Policy agreement box, and click **UPLOAD & CONTINUE**. The Hub reads your `manifest.json` from the zip automatically.
+> 3. On the edit page that follows, fill in or confirm these fields:
 >
-> - The Hub auto-parses `changelog.txt` from inside the zip - no copy-paste needed.
-> - License is set once at first upload and persists across versions.
-> - Mark the version as **Stable** (or **Beta** if it's a pre-release).
+>    | Hub field | Your value |
+>    |---|---|
+>    | **Name** | `<display_name>` -- max 50 chars, **cannot be changed after submit** |
+>    | **Short description** | `<description_short>` -- max 180 chars, **cannot be changed after submit** |
+>    | **Description** | `<description_long>` |
+>    | **License** | Pick one: **MIT** (permissive), **COI-Open** (share-alike within COI), or **COI-Keep** (no derivatives without permission). Set once; cannot change later. |
+>    | **Source URL** | Your GitHub repo (from `links` in manifest) |
+>    | **Tags** | Pick what fits: Quality of Life, Tweaks, Balance, UI, Overhaul... |
+>    | **Status** | **Stable** (or **Beta** for a pre-release) |
+>
+> 4. Add screenshots if you have them -- optional but a single in-game shot helps a lot.
+> 5. Submit. The listing may need a brief review before going public.
+>
+> Full walkthrough with all the details (including save-game flags, game version fields, and license explanations) is in `PUBLISHING.md`.
+
+---
 
 Conclude with something fun and lighthearted - a "she's seaworthy" / "all hands celebrated" / "v<version> is on the shipping lane" beat works well. Sprinkle, don't pour.
 
