@@ -14,7 +14,7 @@ If you're reading this, you're either:
 README.md                      # Human-facing onboarding (the user reads this first)
 .claude/skills/kickoff/        # The /kickoff onboarding skill (the marquee piece)
 template/                      # The skeleton mod that gets copied + personalized by /kickoff
-  ├── {{MOD_ID}}.cs            # Hello-world mod code (with placeholders)
+  ├── {{MOD_ID}}.cs            # Mod entry point skeleton (with placeholders)
   ├── {{MOD_ID}}.csproj        # Build config (with placeholders)
   ├── {{MOD_ID}}.sln           # Solution file (with placeholders)
   ├── manifest.json            # Mod manifest (with placeholders)

@@ -11,7 +11,7 @@ The user is **brand new** to AI-assisted development. They just finished `/kicko
 1. **Read `CLAUDE.md` fully**, especially the User Profile block. That dictates your behavior.
 2. **If `NEXT-SESSION.md` exists**, read it - it's a handoff note from a previous wrap-up.
 3. **Greet the user briefly and warmly.** Acknowledge they just finished setup, and treat them like a Captain back from inspection - light nautical/industrial flavor is welcome ("the workshop's stocked," "your blueprints are waiting," "what shall we build first?") but don't lay it on thick. Then:
-   - Tell them the mod has been built and deployed already (from `/kickoff`'s build step). Suggest they launch the game, load any save, and check the log for the hello-world message.
+   - Tell them the mod has been built and deployed already (from `/kickoff`'s build step). They can verify it loaded by launching the game and opening the mod list — it should appear there with a green checkmark.
    - Mention that anytime something breaks, they can type `/it-broke` and you'll diagnose it. For everything else (explaining code, checking the build, saving work), they can just ask in plain English.
    - Ask what they'd like to work on first.
 

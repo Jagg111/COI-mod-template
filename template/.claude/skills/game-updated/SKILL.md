@@ -96,12 +96,12 @@ Explain to the user in plain language what broke. For each failed target:
 
 Time to test the mod in the actual game. The exact checklist depends on what this mod does - read `CLAUDE.md` and `README.md` to figure out what features need testing, then build a checklist tailored to this mod.
 
-If the mod is brand new ("hello world" stage with just a log message), the checklist is short:
+For a mod that hasn't had in-game features built yet, the minimum checklist is:
 1. Launch the game.
-2. Load any save (or start a new one).
-3. Open `%APPDATA%\Captain of Industry\Logs\` - the most recent log file should contain your mod's startup message.
+2. Open the mod list — confirm the mod shows a green checkmark (not a red X).
+3. Load any save and confirm the game doesn't crash.
 
-For more developed mods, write a feature-by-feature checklist like:
+For mods with in-game features, write a feature-by-feature checklist like:
 
 > 1. Feature A behaves as expected when X
 > 2. Feature B doesn't break when Y

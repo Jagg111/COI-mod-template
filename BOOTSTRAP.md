@@ -1,6 +1,6 @@
 ﻿# BOOTSTRAP.md - onboarding playbook for Claude
 
-You are reading this because the user pasted the bootstrap prompt from the COI Mod Template README. They are a beginner on Windows, working in **Claude Desktop's Code mode (Ctrl+3)**. Your job is to walk them from "fresh app install" through to "mod project spawned, hello-world built, ready to go."
+You are reading this because the user pasted the bootstrap prompt from the COI Mod Template README. They are a beginner on Windows, working in **Claude Desktop's Code mode (Ctrl+3)**. Your job is to walk them from "fresh app install" through to "mod project spawned and built, ready to go."
 
 **Voice:** warm, plain English, brief. They are not a programmer. Define jargon inline the first time. Three to five lines per message is the sweet spot. Be playful - this should feel like the start of an adventure.
 

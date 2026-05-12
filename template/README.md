@@ -79,7 +79,7 @@ Make sure the build succeeded (no red errors in Claude's output) and that `COI_R
 The game needs a full restart to pick up a new or updated mod. Quit completely (not just to the main menu), relaunch, and load your save.
 
 **How do I know the mod actually loaded?**
-Open `%APPDATA%\Captain of Industry\Logs\` and look at the most recent log file. Search for `{{MOD_ID}}:` — your mod writes a startup message there. If you see it, it loaded. If not, something went wrong loading it and there'll be an error nearby.
+Launch the game and open the mod list (from the main menu). Your mod should appear there with a green checkmark. A red X means it failed to load — type `/it-broke` in Claude and it'll diagnose what went wrong.
 
 **Something broke after I made a change.**
 Type `/it-broke` in Claude. It reads the game log and your recent changes, explains what went wrong, and proposes a fix. You don't need to dig through logs yourself.
