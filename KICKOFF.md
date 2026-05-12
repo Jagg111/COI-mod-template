@@ -215,16 +215,20 @@ This is critical. The user must close this Claude Desktop session and start a fr
 
 Be explicit: non-tech users will absolutely try to just keep chatting here.
 
+In the sample wording below, `<TARGET_PATH>` means the actual folder path you collected in Step 4 - not a generic default. Substitute the real path the user chose (e.g. `C:\Code\BetterLogistics` or wherever they put it).
+
 Sample wording (adapt freely, but keep all the substance):
 
 > 🚢 **The keel's laid, Captain - your shipyard is open.**
 >
-> Your mod lives at `C:\Code\<MOD_ID>`. We're done in *this* dock - **don't keep chatting in this window. Open a fresh Claude Desktop session pointed at your new mod folder instead.** Here's how to weigh anchor:
+> Your mod lives at `<TARGET_PATH>`. Before you head over, here's the one thing worth knowing: **Claude becomes your mod's assistant by reading a file called `CLAUDE.md` inside your mod's folder.** That file has your mod's name, your working style, and all the collaboration rules you just set up. Right now Claude is still pointed at this setup tool - not your mod. Opening a fresh session in your mod folder is how it crosses the threshold and becomes *your* mod's co-pilot. Think of it like unlocking your new workshop: everything's set up and waiting inside - you just need to walk in.
 >
-> 1. Close this Claude Desktop window.
-> 2. Open Claude Desktop again, hit **Ctrl+3** for Code mode.
-> 3. When it asks what folder to work in (or in the folder picker), point it at `C:\Code\<MOD_ID>`.
-> 4. When the new session greets you, tell it what you want to build. Something like: *"Let's launch the game and check that my hello-world message shows up in the log."*
+> **How to open your mod's workshop:**
+>
+> 1. Click **File → Exit** (top-left menu) to fully close Claude Desktop.
+> 2. Reopen Claude Desktop and click the **Code** tab.
+> 3. Just above the prompt field, click the **folder button** (it shows your current folder name). A menu appears with recent folders and an **"Open folder…"** option at the bottom — click that, then navigate to `<TARGET_PATH>` and select it.
+> 4. Once the folder is set, send this as your first message: *"Read CLAUDE-FIRST-SESSION.md and let's get started."*
 >
 > A few things worth knowing before you set sail:
 > - The mod's already been built and shipped to your game's mods folder. Launch the game, load any save, and look in `%APPDATA%\Captain of Industry\Logs\` for a line starting with `<MOD_ID>:` - that's your hello.

@@ -6,7 +6,7 @@
 
 ## 🛠️ How to work on the mod
 
-Open this folder in **Claude Desktop's Code mode** (`Ctrl+3` inside the app - not Chat, not Cowork). From there, just **tell Claude what you want** in plain English. The more specific the better:
+Open **this folder** in **Claude Desktop's Code mode** (`Ctrl+3` inside the app — not Chat, not Cowork). Opening this specific folder is how Claude loads your mod's setup: it reads `CLAUDE.md` here to learn your mod's name, your working style, and how to collaborate with you. From there, just **tell Claude what you want** in plain English. The more specific the better:
 
 - *"Add a button labeled 'Paint' to the top toolbar"*
 - *"Why isn't my mod loading?"*
